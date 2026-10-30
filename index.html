@@ -1,1938 +1,1118 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LionFuel Student Management System</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #3a86ff;
-            --primary-dark: #2667cc;
-            --secondary: #8338ec;
-            --success: #38b000;
-            --warning: #ff9e00;
-            --danger: #ff006e;
-            --info: #00bbf9;
-            --dark: #1a1a2e;
-            --light: #f8f9fa;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
-            --border-radius: 10px;
-            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --transition: all 0.3s ease;
-        }
-
-        .dark-theme {
-            --dark: #f8f9fa;
-            --light: #1a1a2e;
-            --light-gray: #2d3047;
-            --gray: #adb5bd;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            transition: var(--transition);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 1.2rem 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        .header-controls {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        /* Dashboard Stats */
-        .dashboard-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .stat-card {
-            background: var(--light);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: var(--box-shadow);
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            transition: var(--transition);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-
-        .stat-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-        }
-
-        .stat-1 .stat-icon { background: rgba(58, 134, 255, 0.1); color: var(--primary); }
-        .stat-2 .stat-icon { background: rgba(56, 176, 0, 0.1); color: var(--success); }
-        .stat-3 .stat-icon { background: rgba(255, 158, 0, 0.1); color: var(--warning); }
-        .stat-4 .stat-icon { background: rgba(255, 0, 110, 0.1); color: var(--danger); }
-
-        .stat-info h3 {
-            font-size: 2rem;
-            margin-bottom: 5px;
-        }
-
-        .stat-info p {
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-
-        /* Main Content Layout */
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        @media (max-width: 1100px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Cards */
-        .card {
-            background: var(--light);
-            border-radius: var(--border-radius);
-            padding: 1.8rem;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 25px;
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--light-gray);
-            padding-bottom: 1rem;
-        }
-
-        .card-header h2 {
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-
-        .card-header i {
-            font-size: 1.2rem;
-        }
-
-        /* Form Elements */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--light-gray);
-            border-radius: 8px;
-            background: var(--light);
-            color: var(--dark);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.2);
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
-
-        .btn-warning {
-            background: var(--warning);
-            color: white;
-        }
-
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-        }
-
-        .btn-sm {
-            padding: 8px 15px;
-            font-size: 0.9rem;
-        }
-
-        .btn-icon {
-            padding: 10px;
-            width: 40px;
-            height: 40px;
-        }
-
-        /* Table */
-        .table-container {
-            overflow-x: auto;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 800px;
-        }
-
-        th {
-            background: var(--light-gray);
-            color: var(--dark);
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            padding: 15px;
-            text-align: left;
-        }
-
-        td {
-            padding: 15px;
-            border-bottom: 1px solid var(--light-gray);
-        }
-
-        tr:hover {
-            background: rgba(58, 134, 255, 0.05);
-        }
-
-        .status {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: inline-block;
-        }
-
-        .status-paid {
-            background: rgba(56, 176, 0, 0.15);
-            color: var(--success);
-        }
-
-        .status-pending {
-            background: rgba(255, 158, 0, 0.15);
-            color: var(--warning);
-        }
-
-        .status-overdue {
-            background: rgba(255, 0, 110, 0.15);
-            color: var(--danger);
-        }
-
-        .actions {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        /* Session Calendar */
-        .calendar-container {
-            background: var(--light);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
-        }
-
-        .calendar-day {
-            background: var(--light-gray);
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        .calendar-date {
-            background: var(--light);
-            padding: 15px 10px;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            min-height: 80px;
-        }
-
-        .calendar-date:hover {
-            background: rgba(58, 134, 255, 0.1);
-        }
-
-        .calendar-date.has-session {
-            background: rgba(56, 176, 0, 0.1);
-            border: 2px solid var(--success);
-        }
-
-        .calendar-date.today {
-            background: var(--primary);
-            color: white;
-        }
-
-        .session-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--info);
-            border-radius: 50%;
-            margin: 5px auto 0;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: var(--light);
-            border-radius: var(--border-radius);
-            width: 100%;
-            max-width: 800px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .modal-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--light-gray);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-body {
-            padding: 1.5rem;
-        }
-
-        .modal-footer {
-            padding: 1.5rem;
-            border-top: 1px solid var(--light-gray);
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray);
-        }
-
-        /* Invoice */
-        .invoice {
-            background: white;
-            padding: 30px;
-            border-radius: var(--border-radius);
-            color: #333;
-        }
-
-        .invoice-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-        }
-
-        .invoice-body table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-
-        .invoice-body th {
-            background: #f1f1f1;
-        }
-
-        .invoice-body td, .invoice-body th {
-            padding: 12px;
-            border: 1px solid #ddd;
-        }
-
-        .invoice-total {
-            text-align: right;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-top: 20px;
-        }
-
-        /* Search and Filters */
-        .search-container {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .search-box {
-            flex: 1;
-            min-width: 250px;
-            position: relative;
-        }
-
-        .search-box i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gray);
-        }
-
-        .search-box input {
-            padding-left: 45px;
-        }
-
-        /* Toast Notifications */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            padding: 15px 20px;
-            border-radius: 8px;
-            color: white;
-            font-weight: 600;
-            z-index: 1100;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: transform 0.3s, opacity 0.3s;
-        }
-
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .toast-success {
-            background: var(--success);
-        }
-
-        .toast-error {
-            background: var(--danger);
-        }
-
-        .toast-info {
-            background: var(--info);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-        }
-
-        /* Utility Classes */
-        .hidden {
-            display: none !important;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .mb-3 {
-            margin-bottom: 1rem;
-        }
-
-        .mb-4 {
-            margin-bottom: 1.5rem;
-        }
-
-        .mt-3 {
-            margin-top: 1rem;
-        }
-
-        .mt-4 {
-            margin-top: 1.5rem;
-        }
-
-        .d-flex {
-            display: flex;
-        }
-
-        .align-center {
-            align-items: center;
-        }
-
-        .justify-between {
-            justify-content: space-between;
-        }
-
-        .gap-2 {
-            gap: 10px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-
-            .dashboard-stats {
-                grid-template-columns: 1fr;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .calendar-grid {
-                grid-template-columns: repeat(7, 1fr);
-                font-size: 0.9rem;
-            }
-
-            .calendar-date {
-                padding: 8px 5px;
-                min-height: 60px;
-            }
-
-            .search-container {
-                flex-direction: column;
-            }
-
-            .search-box {
-                min-width: 100%;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zafran Gold Mauritius | Premium Iranian Saffron</title>
+
+<meta name="description" content="Discover premium saffron imported from Iran. Zafran Gold Mauritius offers Iranian saffron for home cooking, restaurants and gifting, with delivery across Mauritius. Order directly on WhatsApp.">
+
+<meta name="keywords" content="buy saffron Mauritius, Iranian saffron Mauritius, buy zafran Mauritius, saffron price Mauritius, pure saffron, saffron delivery Mauritius, safran Maurice, safran iranien">
+
+<meta name="author" content="Zafran Gold Mauritius">
+<meta name="theme-color" content="#100e0a">
+
+<meta property="og:title" content="Zafran Gold Mauritius | The Golden Treasure">
+<meta property="og:description" content="Discover the extraordinary taste and aroma of Iranian saffron. Order on WhatsApp. Delivery across Mauritius.">
+<meta property="og:type" content="website">
+
+<style>
+:root {
+  --black: #100e0a;
+  --dark: #19140e;
+  --gold: #d5a94c;
+  --gold-light: #f2d58b;
+  --red: #a52820;
+  --cream: #f7f0e2;
+  --muted: #b9ad98;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: Georgia, 'Times New Roman', serif;
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+.container {
+  width: min(1160px, 90%);
+  margin: auto;
+}
+
+.gold {
+  color: var(--gold-light);
+}
+
+.eyebrow {
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 11px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
+
+/* NAVIGATION */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(16,14,10,.96);
+  border-bottom: 1px solid rgba(213,169,76,.22);
+  backdrop-filter: blur(12px);
+}
+
+.nav {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logo {
+  font-size: 23px;
+  color: var(--gold-light);
+  font-weight: bold;
+  letter-spacing: 2px;
+  line-height: 1.1;
+}
+
+.logo small {
+  display: block;
+  color: #fff;
+  font-size: 9px;
+  letter-spacing: 5px;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.navlinks {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font: 12px Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.navlinks a:hover {
+  color: var(--gold);
+}
+
+.nav-cta {
+  border: 1px solid var(--gold);
+  padding: 10px 18px;
+  color: var(--gold-light);
+}
+
+.menu-button {
+  display: none;
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+/* HERO */
+
+.hero {
+  min-height: 690px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 75% 50%, #5a2617 0%, transparent 35%),
+    radial-gradient(ellipse at 85% 90%, #33200d 0%, transparent 40%),
+    linear-gradient(110deg, #100e0a 35%, #21130d 100%);
+}
+
+.hero:before {
+  content: "✦";
+  position: absolute;
+  right: 9%;
+  top: 12%;
+  color: rgba(213,169,76,.15);
+  font-size: 380px;
+  line-height: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  padding: 100px 0;
+}
+
+.hero h1 {
+  font-size: clamp(44px, 7vw, 82px);
+  line-height: 1.08;
+  margin: 24px 0;
+  font-weight: normal;
+}
+
+.hero h1 span {
+  color: var(--gold-light);
+  font-style: italic;
+}
+
+.hero p {
+  color: #d1c4ad;
+  font-size: 17px;
+  max-width: 520px;
+  margin-bottom: 32px;
+}
+
+.hero-note {
+  color: var(--gold);
+  font: 11px Arial, sans-serif;
+  letter-spacing: 2px;
+  margin-top: 24px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 15px 27px;
+  font: bold 12px Arial, sans-serif;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: .25s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: #171008;
+}
+
+.btn-gold:hover {
+  background: var(--gold-light);
+  transform: translateY(-3px);
+}
+
+.btn-outline {
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+  margin-left: 10px;
+}
+
+.btn-outline:hover {
+  background: var(--gold);
+  color: #171008;
+}
+
+/* TRUST STRIP */
+
+.trust {
+  background: #211a10;
+  border-top: 1px solid #49351a;
+  border-bottom: 1px solid #49351a;
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  text-align: center;
+}
+
+.trust-item {
+  padding: 24px 12px;
+  border-right: 1px solid #49351a;
+}
+
+.trust-item:last-child {
+  border: none;
+}
+
+.trust-item strong {
+  display: block;
+  color: var(--gold-light);
+  font-size: 15px;
+}
+
+.trust-item span {
+  color: var(--muted);
+  font: 10px Arial, sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* SECTIONS */
+
+section {
+  padding: 105px 0;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 55px;
+}
+
+.section-heading h2 {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: normal;
+  margin: 12px 0;
+}
+
+.section-heading p {
+  color: var(--muted);
+  max-width: 570px;
+  margin: auto;
+  font-size: 15px;
+}
+
+/* PRODUCT */
+
+.product-section {
+  background: var(--cream);
+  color: #21170e;
+}
+
+.product-section .section-heading p {
+  color: #6f6251;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 24px;
+}
+
+.product-card {
+  background: #fffaf0;
+  border: 1px solid #e8d9b9;
+  padding: 35px 25px;
+  text-align: center;
+  transition: .3s;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(60,35,5,.12);
+}
+
+.product-art {
+  width: 100%;
+  height: 190px;
+  background:
+    radial-gradient(ellipse, #6e1b12, #26150e 70%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 26px;
+  position: relative;
+  overflow: hidden;
+}
+
+.jar {
+  width: 105px;
+  height: 135px;
+  border: 3px solid rgba(239,211,147,.7);
+  border-radius: 12px 12px 25px 25px;
+  background: linear-gradient(100deg,rgba(255,255,255,.3),rgba(100,20,10,.2),rgba(255,255,255,.15));
+  box-shadow: 0 15px 35px #130b08;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jar-label {
+  background: #21140b;
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+  padding: 10px 5px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.jar-label small {
+  display: block;
+  font-size: 7px;
+  margin-top: 5px;
+}
+
+.product-card h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.product-card p {
+  color: #71634f;
+  font: 13px Arial, sans-serif;
+  min-height: 65px;
+}
+
+.product-card .btn {
+  margin-top: 22px;
+  width: 100%;
+}
+
+/* STORY */
+
+.story {
+  background: #15110c;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 75px;
+  align-items: center;
+}
+
+.story-art {
+  min-height: 440px;
+  background:
+    radial-gradient(ellipse at center, #9d4a1d 0%, #501b12 38%, #1b100b 75%);
+  border: 1px solid rgba(213,169,76,.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.story-art-inner {
+  border: 1px solid var(--gold);
+  padding: 45px 25px;
+  width: 75%;
+}
+
+.story-art-inner .symbol {
+  font-size: 75px;
+  color: var(--gold-light);
+}
+
+.story-art-inner h3 {
+  font-size: 26px;
+  color: var(--gold-light);
+  font-weight: normal;
+}
+
+.story-text h2 {
+  font-size: clamp(34px,4vw,49px);
+  font-weight: normal;
+  line-height: 1.2;
+  margin: 15px 0 25px;
+}
+
+.story-text p {
+  color: #c4b8a4;
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+
+.story-points {
+  margin-top: 25px;
+  display: grid;
+  gap: 12px;
+  color: var(--gold-light);
+  font-size: 14px;
+}
+
+/* USES */
+
+.uses {
+  background: #21190f;
+}
+
+.uses-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 22px;
+}
+
+.use-card {
+  padding: 35px 25px;
+  border: 1px solid rgba(213,169,76,.25);
+  text-align: center;
+}
+
+.use-card .icon {
+  font-size: 38px;
+  margin-bottom: 18px;
+}
+
+.use-card h3 {
+  font-size: 22px;
+  color: var(--gold-light);
+  margin-bottom: 10px;
+  font-weight: normal;
+}
+
+.use-card p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* DELIVERY */
+
+.delivery {
+  background: var(--cream);
+  color: #21170e;
+  text-align: center;
+}
+
+.delivery h2 {
+  font-size: clamp(34px,5vw,49px);
+  font-weight: normal;
+  margin: 15px 0;
+}
+
+.delivery p {
+  max-width: 600px;
+  margin: 15px auto 30px;
+  color: #6f6251;
+}
+
+.delivery-icon {
+  font-size: 48px;
+}
+
+/* FAQ */
+
+.faq {
+  background: #15110c;
+}
+
+.faq-list {
+  max-width: 800px;
+  margin: auto;
+}
+
+details {
+  border-bottom: 1px solid #55432a;
+  padding: 20px 5px;
+}
+
+summary {
+  color: var(--gold-light);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+details p {
+  color: #c1b39e;
+  font-size: 14px;
+  padding: 15px 0 5px;
+}
+
+/* CONTACT */
+
+.contact {
+  background:
+    radial-gradient(ellipse at center, #432216, #15100a 75%);
+  text-align: center;
+}
+
+.contact h2 {
+  font-size: clamp(36px,5vw,54px);
+  font-weight: normal;
+  margin: 15px 0;
+}
+
+.contact p {
+  color: #c8bba5;
+  max-width: 560px;
+  margin: 0 auto 30px;
+}
+
+.contact-details {
+  margin-top: 35px;
+  color: var(--gold-light);
+  font: 13px Arial, sans-serif;
+  line-height: 2.4;
+}
+
+/* FOOTER */
+
+footer {
+  background: #090806;
+  border-top: 1px solid #4d381d;
+  padding: 40px 0;
+  text-align: center;
+}
+
+footer .logo {
+  display: inline-block;
+}
+
+footer p {
+  color: #8f826d;
+  font: 11px Arial, sans-serif;
+  margin-top: 17px;
+}
+
+.footer-links {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  color: var(--gold-light);
+  font: 11px Arial, sans-serif;
+}
+
+/* FLOATING WHATSAPP */
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  z-index: 999;
+  background: #20c568;
+  color: white;
+  border-radius: 40px;
+  padding: 14px 20px;
+  font: bold 13px Arial, sans-serif;
+  box-shadow: 0 5px 25px #0008;
+}
+
+.whatsapp-float:hover {
+  background: #159d50;
+}
+
+/* MOBILE */
+
+@media(max-width:800px) {
+  .menu-button {
+    display: block;
+  }
+
+  .navlinks {
+    display: none;
+    position: absolute;
+    top: 78px;
+    left: 0;
+    width: 100%;
+    padding: 25px;
+    background: #15110c;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .navlinks.active {
+    display: flex;
+  }
+
+  .hero {
+    min-height: 590px;
+  }
+
+  .hero:before {
+    font-size: 220px;
+    right: -5%;
+    top: 30%;
+  }
+
+  .hero-content {
+    padding: 75px 0;
+  }
+
+  .product-grid,
+  .uses-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .story-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .story-art {
+    min-height: 300px;
+  }
+
+  .trust-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-item {
+    border-right: none;
+    border-bottom: 1px solid #49351a;
+  }
+
+  section {
+    padding: 75px 0;
+  }
+
+  .btn-outline {
+    margin: 12px 0 0;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior: auto; }
+  *, *:before, *:after {
+    transition: none !important;
+  }
+}
+</style>
 </head>
+
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container header-content">
-            <div class="logo">
-                <i class="fas fa-graduation-cap"></i>
-                <div>
-                    <div>LionFuel</div>
-                    <div style="font-size: 1rem; font-weight: normal;">Student Management System</div>
-                </div>
-            </div>
-            <div class="header-controls">
-                <div id="currentDateTime" style="font-weight: 600;"></div>
-                <button class="btn btn-primary" onclick="toggleTheme()">
-                    <i class="fas fa-moon"></i> Theme
-                </button>
-            </div>
-        </div>
-    </header>
 
-    <div class="container">
-        <!-- Dashboard Stats -->
-        <div class="dashboard-stats">
-            <div class="stat-card stat-1">
-                <div class="stat-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <div class="stat-info">
-                    <h3 id="totalStudents">0</h3>
-                    <p>Total Students</p>
-                </div>
-            </div>
-            <div class="stat-card stat-2">
-                <div class="stat-icon">
-                    <i class="fas fa-check-circle"></i>
-                </div>
-                <div class="stat-info">
-                    <h3 id="paidStudents">0</h3>
-                    <p>Paid Fees</p>
-                </div>
-            </div>
-            <div class="stat-card stat-3">
-                <div class="stat-icon">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <div class="stat-info">
-                    <h3 id="pendingStudents">0</h3>
-                    <p>Pending Fees</p>
-                </div>
-            </div>
-            <div class="stat-card stat-4">
-                <div class="stat-icon">
-                    <i class="fas fa-exclamation-triangle"></i>
-                </div>
-                <div class="stat-info">
-                    <h3 id="overdueStudents">0</h3>
-                    <p>Overdue Fees</p>
-                </div>
-            </div>
-        </div>
+<header>
+  <div class="container nav">
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Add Student Form -->
-            <div class="card">
-                <div class="card-header">
-                    <h2><i class="fas fa-user-plus"></i> Add New Student</h2>
-                </div>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="name">Full Name *</label>
-                        <input type="text" id="name" placeholder="Enter full name">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" placeholder="student@example.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" placeholder="+1 (123) 456-7890">
-                    </div>
-                    <div class="form-group">
-                        <label for="joinDate">Join Date *</label>
-                        <input type="date" id="joinDate">
-                    </div>
-                    <div class="form-group">
-                        <label for="course">Course *</label>
-                        <select id="course">
-                            <option value="">Select Course</option>
-                            <option value="Web Development">Web Development</option>
-                            <option value="Data Science">Data Science</option>
-                            <option value="Digital Marketing">Digital Marketing</option>
-                            <option value="UI/UX Design">UI/UX Design</option>
-                            <option value="Business Analytics">Business Analytics</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="amount">Amount ($) *</label>
-                        <input type="number" id="amount" placeholder="500" min="0" step="10">
-                    </div>
-                    <div class="form-group">
-                        <label for="paymentMethod">Payment Method</label>
-                        <select id="paymentMethod">
-                            <option value="Bank Transfer">Bank Transfer</option>
-                            <option value="Credit Card">Credit Card</option>
-                            <option value="PayPal">PayPal</option>
-                            <option value="Cash">Cash</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="paymentStatus">Payment Status *</label>
-                        <select id="paymentStatus">
-                            <option value="Paid">Paid</option>
-                            <option value="Pending">Pending</option>
-                            <option value="Partial">Partial Payment</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="dueDate">Due Date</label>
-                        <input type="date" id="dueDate">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="notes">Additional Notes</label>
-                    <textarea id="notes" rows="3" placeholder="Any additional information about the student..."></textarea>
-                </div>
-                <button class="btn btn-primary" onclick="addStudent()">
-                    <i class="fas fa-plus"></i> Add Student
-                </button>
-            </div>
+    <a href="#home" class="logo">
+      ZAFRAN GOLD
+      <small>MAURITIUS</small>
+    </a>
 
-            <!-- Session Management -->
-            <div class="card">
-                <div class="card-header">
-                    <h2><i class="fas fa-calendar-alt"></i> Schedule Session</h2>
-                </div>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="sessionStudent">Student *</label>
-                        <select id="sessionStudent">
-                            <option value="">Select Student</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="sessionDate">Date *</label>
-                        <input type="date" id="sessionDate">
-                    </div>
-                    <div class="form-group">
-                        <label for="sessionTime">Time *</label>
-                        <input type="time" id="sessionTime">
-                    </div>
-                    <div class="form-group">
-                        <label for="sessionDuration">Duration (min)</label>
-                        <select id="sessionDuration">
-                            <option value="30">30 minutes</option>
-                            <option value="45">45 minutes</option>
-                            <option value="60" selected>60 minutes</option>
-                            <option value="90">90 minutes</option>
-                            <option value="120">120 minutes</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="sessionNotes">Session Notes</label>
-                    <textarea id="sessionNotes" rows="2" placeholder="Topic, materials needed, etc..."></textarea>
-                </div>
-                <div class="d-flex justify-between">
-                    <button class="btn btn-success" onclick="scheduleSession()">
-                        <i class="fas fa-calendar-plus"></i> Schedule Session
-                    </button>
-                    <button class="btn btn-primary" onclick="generateSessionMessage()">
-                        <i class="fas fa-comment"></i> Generate Message
-                    </button>
-                </div>
-                
-                <!-- Session Message Output -->
-                <div id="sessionMessage" class="hidden mt-3">
-                    <div class="card-header">
-                        <h3><i class="fas fa-envelope"></i> Session Notification</h3>
-                        <button class="btn btn-sm btn-primary" onclick="copySessionMessage()">
-                            <i class="fas fa-copy"></i> Copy
-                        </button>
-                    </div>
-                    <div id="messageContent" class="output" style="white-space: pre-wrap; padding: 15px; background: var(--light-gray); border-radius: 8px;"></div>
-                </div>
-            </div>
-        </div>
+    <button class="menu-button" onclick="toggleMenu()" aria-label="Open navigation menu">
+      ☰
+    </button>
 
-        <!-- Search and Filter -->
-        <div class="search-container">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Search students by name, email, or course...">
-            </div>
-            <div class="d-flex gap-2">
-                <select id="filterStatus" onchange="filterStudents()">
-                    <option value="all">All Statuses</option>
-                    <option value="Paid">Paid</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Partial">Partial</option>
-                </select>
-                <select id="filterCourse" onchange="filterStudents()">
-                    <option value="all">All Courses</option>
-                    <option value="Web Development">Web Development</option>
-                    <option value="Data Science">Data Science</option>
-                    <option value="Digital Marketing">Digital Marketing</option>
-                </select>
-                <button class="btn btn-primary" onclick="exportData()">
-                    <i class="fas fa-download"></i> Export
-                </button>
-            </div>
-        </div>
+    <nav class="navlinks" id="navlinks">
+      <a href="#home" onclick="toggleMenu()">Home</a>
+      <a href="#products" onclick="toggleMenu()">Our Saffron</a>
+      <a href="#story" onclick="toggleMenu()">Our Story</a>
+      <a href="#delivery" onclick="toggleMenu()">Delivery</a>
+      <a href="#contact" class="nav-cta" onclick="toggleMenu()">Contact Us</a>
+    </nav>
 
-        <!-- Students Table -->
-        <div class="card">
-            <div class="card-header">
-                <h2><i class="fas fa-users"></i> Students List</h2>
-                <div>
-                    <span id="studentCount">0</span> students
-                </div>
-            </div>
-            <div class="table-container">
-                <table id="studentsTable">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Course</th>
-                            <th>Join Date</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Due Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="studentsTableBody">
-                        <!-- Students will be loaded here -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
+  </div>
+</header>
 
-        <!-- Calendar Section -->
-        <div class="calendar-container">
-            <div class="calendar-header">
-                <h2><i class="fas fa-calendar"></i> Session Calendar</h2>
-                <div class="d-flex gap-2">
-                    <button class="btn btn-sm btn-primary" onclick="prevMonth()">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <h3 id="currentMonth">June 2023</h3>
-                    <button class="btn btn-sm btn-primary" onclick="nextMonth()">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="calendar-grid">
-                <div class="calendar-day">Sun</div>
-                <div class="calendar-day">Mon</div>
-                <div class="calendar-day">Tue</div>
-                <div class="calendar-day">Wed</div>
-                <div class="calendar-day">Thu</div>
-                <div class="calendar-day">Fri</div>
-                <div class="calendar-day">Sat</div>
-                <!-- Calendar dates will be generated by JavaScript -->
-            </div>
-        </div>
+<!-- HERO -->
 
-        <!-- Upcoming Sessions -->
-        <div class="card">
-            <div class="card-header">
-                <h2><i class="fas fa-clock"></i> Upcoming Sessions</h2>
-            </div>
-            <div class="table-container">
-                <table id="sessionsTable">
-                    <thead>
-                        <tr>
-                            <th>Student</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Duration</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="sessionsTableBody">
-                        <!-- Sessions will be loaded here -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
+<main>
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-content">
+
+      <div class="eyebrow">An exceptional taste from Iran</div>
+
+      <h1>
+        Discover the
+        <span>Golden Treasure</span>
+        of Saffron.
+      </h1>
+
+      <p>
+        Experience the distinctive colour, delicate aroma
+        and extraordinary culinary character of Iranian
+        saffron, brought to Mauritius.
+      </p>
+
+      <a class="btn btn-gold"
+         href="https://wa.me/23058251875?text=Hello%20Zafran%20Gold%2C%20I%20would%20like%20to%20order%20Iranian%20saffron.">
+        ORDER ON WHATSAPP →
+      </a>
+
+      <a class="btn btn-outline" href="#products">
+        DISCOVER MORE
+      </a>
+
+      <div class="hero-note">
+        IRANIAN ORIGIN · MAURITIUS DELIVERY
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+
+<div class="trust">
+  <div class="container trust-grid">
+
+    <div class="trust-item">
+      <strong>Iranian Origin</strong>
+      <span>Saffron imported from Iran</span>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>© 2023 LionFuel Student Management System. All rights reserved.</p>
-            <p>Designed for educational institutions and training centers</p>
-        </div>
-    </footer>
-
-    <!-- Modals -->
-    <!-- Student Profile Modal -->
-    <div class="modal" id="profileModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-user"></i> Student Profile</h2>
-                <button class="close-modal" onclick="closeModal('profileModal')">&times;</button>
-            </div>
-            <div class="modal-body" id="profileContent">
-                <!-- Profile content will be loaded here -->
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" onclick="closeModal('profileModal')">Close</button>
-            </div>
-        </div>
+    <div class="trust-item">
+      <strong>Premium Selection</strong>
+      <span>Carefully presented saffron</span>
     </div>
 
-    <!-- Invoice Modal -->
-    <div class="modal" id="invoiceModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-file-invoice-dollar"></i> Invoice</h2>
-                <button class="close-modal" onclick="closeModal('invoiceModal')">&times;</button>
+    <div class="trust-item">
+      <strong>Islandwide Delivery</strong>
+      <span>Across Mauritius</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+
+<section class="product-section" id="products">
+  <div class="container">
+
+    <div class="section-heading">
+      <div class="eyebrow">Our collection</div>
+      <h2>Experience <span class="gold">Iranian Saffron</span></h2>
+      <p>
+        A precious spice celebrated for its beautiful colour,
+        distinctive aroma and place in exceptional cuisine.
+      </p>
+    </div>
+
+    <div class="product-grid">
+
+      <article class="product-card">
+        <div class="product-art">
+          <div class="jar">
+            <div class="jar-label">
+              ZAFRAN
+              <small>GOLD</small>
             </div>
-            <div class="modal-body" id="invoiceContent">
-                <!-- Invoice content will be loaded here -->
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" onclick="printInvoice()">
-                    <i class="fas fa-print"></i> Print Invoice
-                </button>
-                <button class="btn" onclick="closeModal('invoiceModal')">Close</button>
-            </div>
+          </div>
         </div>
-    </div>
 
-    <!-- Edit Student Modal -->
-    <div class="modal" id="editModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-edit"></i> Edit Student</h2>
-                <button class="close-modal" onclick="closeModal('editModal')">&times;</button>
+        <h3>Premium Saffron</h3>
+        <p>
+          Discover Iranian saffron threads for everyday
+          cooking and special culinary creations.
+        </p>
+
+        <a class="btn btn-gold"
+           href="https://wa.me/23058251875?text=Hello%2C%20I%20am%20interested%20in%20Premium%20Iranian%20Saffron.%20Please%20send%20me%20your%20prices.">
+          REQUEST PRICE
+        </a>
+      </article>
+
+      <article class="product-card">
+        <div class="product-art">
+          <div class="jar">
+            <div class="jar-label">
+              ZAFRAN
+              <small>PRESTIGE</small>
             </div>
-            <div class="modal-body" id="editContent">
-                <!-- Edit form will be loaded here -->
-            </div>
+          </div>
         </div>
+
+        <h3>Luxury Collection</h3>
+        <p>
+          An elegant saffron selection for those who
+          appreciate fine ingredients and thoughtful gifts.
+        </p>
+
+        <a class="btn btn-gold"
+           href="https://wa.me/23058251875?text=Hello%2C%20please%20send%20me%20details%20of%20your%20Luxury%20Saffron%20Collection.">
+          REQUEST PRICE
+        </a>
+      </article>
+
+      <article class="product-card">
+        <div class="product-art">
+          <div class="jar">
+            <div class="jar-label">
+              ZAFRAN
+              <small>PROFESSIONAL</small>
+            </div>
+          </div>
+        </div>
+
+        <h3>Restaurant Supply</h3>
+        <p>
+          Interested in saffron for your restaurant,
+          hotel, catering business or food establishment?
+        </p>
+
+        <a class="btn btn-gold"
+           href="https://wa.me/23058251875?text=Hello%2C%20I%20represent%20a%20restaurant%20or%20business%20and%20would%20like%20wholesale%20saffron%20pricing.">
+          BUSINESS ENQUIRY
+        </a>
+      </article>
+
     </div>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="toast">
-        <i class="fas fa-check-circle"></i>
-        <span id="toastMessage">Operation completed successfully!</span>
+  </div>
+</section>
+
+<!-- STORY -->
+
+<section class="story" id="story">
+  <div class="container story-grid">
+
+    <div class="story-art">
+      <div class="story-art-inner">
+        <div class="symbol">✦</div>
+        <h3>The Art of Saffron</h3>
+        <p class="gold">A tradition of flavour</p>
+      </div>
     </div>
 
-    <script>
-        // Initialize data
-        let students = JSON.parse(localStorage.getItem("lionfuel_students")) || [];
-        let sessions = JSON.parse(localStorage.getItem("lionfuel_sessions")) || [];
-        let currentDate = new Date();
-        let currentMonth = currentDate.getMonth();
-        let currentYear = currentDate.getFullYear();
+    <div class="story-text">
 
-        // DOM Elements
-        const studentsTableBody = document.getElementById('studentsTableBody');
-        const sessionsTableBody = document.getElementById('sessionsTableBody');
-        const sessionStudentSelect = document.getElementById('sessionStudent');
-        const searchInput = document.getElementById('searchInput');
-        const filterStatus = document.getElementById('filterStatus');
-        const filterCourse = document.getElementById('filterCourse');
+      <div class="eyebrow">From Iran to Mauritius</div>
 
-        // Initialize the application
-        function init() {
-            updateDateTime();
-            setInterval(updateDateTime, 1000);
-            renderStudents();
-            renderSessions();
-            updateStats();
-            populateStudentDropdown();
-            generateCalendar();
-            
-            // Load sample data if empty
-            if (students.length === 0) {
-                loadSampleData();
-            }
-            
-            // Add event listener for search
-            searchInput.addEventListener('input', filterStudents);
-        }
+      <h2>A little saffron.<br>
+        An extraordinary experience.</h2>
 
-        // Update date and time display
-        function updateDateTime() {
-            const now = new Date();
-            const options = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            };
-            document.getElementById('currentDateTime').textContent = now.toLocaleDateString('en-US', options);
-        }
+      <p>
+        Saffron is one of the world's most treasured spices.
+        Harvested from the delicate flower of Crocus sativus,
+        its threads are valued for their distinctive aroma,
+        warm flavour and remarkable golden colour.
+      </p>
 
-        // Toggle dark/light theme
-        function toggleTheme() {
-            document.body.classList.toggle('dark-theme');
-            const themeBtn = document.querySelector('button[onclick="toggleTheme()"]');
-            const icon = themeBtn.querySelector('i');
-            if (document.body.classList.contains('dark-theme')) {
-                icon.className = 'fas fa-sun';
-                showToast('Dark theme activated', 'info');
-            } else {
-                icon.className = 'fas fa-moon';
-                showToast('Light theme activated', 'info');
-            }
-        }
+      <p>
+        At Zafran Gold Mauritius, we bring Iranian-origin
+        saffron to customers who appreciate quality ingredients
+        and the pleasure of exceptional cooking.
+      </p>
 
-        // Add a new student
-        function addStudent() {
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const joinDate = document.getElementById('joinDate').value;
-            const course = document.getElementById('course').value;
-            const amount = document.getElementById('amount').value;
-            const paymentMethod = document.getElementById('paymentMethod').value;
-            const paymentStatus = document.getElementById('paymentStatus').value;
-            const dueDate = document.getElementById('dueDate').value;
-            const notes = document.getElementById('notes').value.trim();
+      <div class="story-points">
+        <div>✦ Iranian origin</div>
+        <div>✦ Distinctive aroma and colour</div>
+        <div>✦ Ideal for cooking and gifting</div>
+        <div>✦ Available across Mauritius</div>
+      </div>
 
-            // Validation
-            if (!name || !joinDate || !course || !amount) {
-                showToast('Please fill in all required fields (*)', 'error');
-                return;
-            }
+    </div>
 
-            // Create student object
-            const student = {
-                id: Date.now(), // Unique ID
-                name,
-                email,
-                phone,
-                joinDate,
-                course,
-                amount: parseFloat(amount),
-                paymentMethod,
-                paymentStatus,
-                dueDate,
-                notes,
-                attendance: [],
-                createdAt: new Date().toISOString()
-            };
+  </div>
+</section>
 
-            // Add to array
-            students.push(student);
-            
-            // Save to localStorage
-            saveData();
-            
-            // Update UI
-            renderStudents();
-            updateStats();
-            populateStudentDropdown();
-            
-            // Clear form
-            document.querySelectorAll('#addStudentForm input, #addStudentForm select, #addStudentForm textarea').forEach(el => {
-                if (el.type !== 'button' && el.type !== 'submit') {
-                    el.value = '';
-                }
-            });
-            
-            showToast(`Student "${name}" added successfully!`, 'success');
-        }
+<!-- USES -->
 
-        // Render students table
-        function renderStudents(filteredStudents = null) {
-            const studentsToRender = filteredStudents || students;
-            studentsTableBody.innerHTML = '';
-            
-            if (studentsToRender.length === 0) {
-                studentsTableBody.innerHTML = `
-                    <tr>
-                        <td colspan="7" class="text-center" style="padding: 40px;">
-                            <i class="fas fa-users" style="font-size: 2rem; margin-bottom: 10px; color: var(--gray);"></i>
-                            <p>No students found. Add your first student above.</p>
-                        </td>
-                    </tr>
-                `;
-                document.getElementById('studentCount').textContent = '0';
-                return;
-            }
-            
-            studentsToRender.forEach(student => {
-                // Check if payment is overdue
-                const isOverdue = student.paymentStatus === 'Pending' && 
-                                  student.dueDate && 
-                                  new Date(student.dueDate) < new Date();
-                
-                let statusClass = 'status-pending';
-                let statusText = student.paymentStatus;
-                
-                if (student.paymentStatus === 'Paid') {
-                    statusClass = 'status-paid';
-                } else if (isOverdue) {
-                    statusClass = 'status-overdue';
-                    statusText = 'Overdue';
-                } else if (student.paymentStatus === 'Partial') {
-                    statusClass = 'status-pending';
-                }
-                
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>
-                        <strong>${student.name}</strong>
-                        ${student.email ? `<div style="font-size: 0.85rem; color: var(--gray);">${student.email}</div>` : ''}
-                    </td>
-                    <td>${student.course}</td>
-                    <td>${formatDate(student.joinDate)}</td>
-                    <td>$${student.amount.toFixed(2)}</td>
-                    <td><span class="status ${statusClass}">${statusText}</span></td>
-                    <td>${student.dueDate ? formatDate(student.dueDate) : 'N/A'}</td>
-                    <td class="actions">
-                        <button class="btn btn-sm btn-primary" onclick="viewProfile(${student.id})">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="btn btn-sm btn-warning" onclick="editStudent(${student.id})">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-success" onclick="generateInvoice(${student.id})">
-                            <i class="fas fa-file-invoice"></i>
-                        </button>
-                        <button class="btn btn-sm btn-danger" onclick="deleteStudent(${student.id})">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                `;
-                studentsTableBody.appendChild(row);
-            });
-            
-            document.getElementById('studentCount').textContent = studentsToRender.length;
-        }
+<section class="uses">
+  <div class="container">
 
-        // Update dashboard statistics
-        function updateStats() {
-            const total = students.length;
-            const paid = students.filter(s => s.paymentStatus === 'Paid').length;
-            const pending = students.filter(s => s.paymentStatus === 'Pending' || s.paymentStatus === 'Partial').length;
-            const overdue = students.filter(s => 
-                s.paymentStatus === 'Pending' && 
-                s.dueDate && 
-                new Date(s.dueDate) < new Date()
-            ).length;
-            
-            document.getElementById('totalStudents').textContent = total;
-            document.getElementById('paidStudents').textContent = paid;
-            document.getElementById('pendingStudents').textContent = pending;
-            document.getElementById('overdueStudents').textContent = overdue;
-        }
+    <div class="section-heading">
+      <div class="eyebrow">Inspired by flavour</div>
+      <h2>Make Every Dish Special</h2>
+      <p>
+        Bring the character of saffron into your favourite
+        recipes and culinary creations.
+      </p>
+    </div>
 
-        // View student profile
-        function viewProfile(studentId) {
-            const student = students.find(s => s.id === studentId);
-            if (!student) return;
-            
-            // Calculate attendance stats
-            const totalSessions = student.attendance.length;
-            const presentCount = student.attendance.filter(a => a.status === 'Present').length;
-            const attendanceRate = totalSessions > 0 ? Math.round((presentCount / totalSessions) * 100) : 0;
-            
-            // Get student sessions
-            const studentSessions = sessions.filter(s => s.studentId === studentId);
-            
-            document.getElementById('profileContent').innerHTML = `
-                <div class="d-flex justify-between align-center mb-4">
-                    <div>
-                        <h3 style="margin-bottom: 5px;">${student.name}</h3>
-                        <p style="color: var(--gray);">${student.course} • Joined ${formatDate(student.joinDate)}</p>
-                    </div>
-                    <div class="text-center">
-                        <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">${attendanceRate}%</div>
-                        <div style="font-size: 0.9rem;">Attendance Rate</div>
-                    </div>
-                </div>
-                
-                <div class="form-grid mb-4">
-                    <div class="form-group">
-                        <label>Email</label>
-                        <div>${student.email || 'N/A'}</div>
-                    </div>
-                    <div class="form-group">
-                        <label>Phone</label>
-                        <div>${student.phone || 'N/A'}</div>
-                    </div>
-                    <div class="form-group">
-                        <label>Payment Status</label>
-                        <div><span class="status ${student.paymentStatus === 'Paid' ? 'status-paid' : 'status-pending'}">${student.paymentStatus}</span></div>
-                    </div>
-                    <div class="form-group">
-                        <label>Amount Due</label>
-                        <div><strong>$${student.amount.toFixed(2)}</strong></div>
-                    </div>
-                </div>
-                
-                <div class="form-group mb-4">
-                    <label>Notes</label>
-                    <div>${student.notes || 'No notes available.'}</div>
-                </div>
-                
-                <h4 class="mb-3">Attendance History</h4>
-                ${totalSessions === 0 ? 
-                    '<p>No attendance records yet.</p>' : 
-                    `<div>Present: ${presentCount} / ${totalSessions} sessions</div>
-                     <div class="mt-2">
-                        <button class="btn btn-sm btn-success" onclick="markAttendance(${studentId}, 'Present')">
-                            <i class="fas fa-check"></i> Mark Present
-                        </button>
-                        <button class="btn btn-sm btn-danger" onclick="markAttendance(${studentId}, 'Absent')">
-                            <i class="fas fa-times"></i> Mark Absent
-                        </button>
-                     </div>`
-                }
-                
-                ${studentSessions.length > 0 ? `
-                    <h4 class="mt-4 mb-3">Upcoming Sessions</h4>
-                    <ul>
-                        ${studentSessions.slice(0, 3).map(session => `
-                            <li>${formatDate(session.date)} at ${session.time} (${session.duration} min)</li>
-                        `).join('')}
-                    </ul>
-                ` : ''}
-            `;
-            
-            openModal('profileModal');
-        }
+    <div class="uses-grid">
 
-        // Edit student
-        function editStudent(studentId) {
-            const student = students.find(s => s.id === studentId);
-            if (!student) return;
-            
-            document.getElementById('editContent').innerHTML = `
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="editName">Full Name *</label>
-                        <input type="text" id="editName" value="${student.name}" placeholder="Enter full name">
-                    </div>
-                    <div class="form-group">
-                        <label for="editEmail">Email Address</label>
-                        <input type="email" id="editEmail" value="${student.email || ''}" placeholder="student@example.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="editCourse">Course *</label>
-                        <select id="editCourse">
-                            <option value="Web Development" ${student.course === 'Web Development' ? 'selected' : ''}>Web Development</option>
-                            <option value="Data Science" ${student.course === 'Data Science' ? 'selected' : ''}>Data Science</option>
-                            <option value="Digital Marketing" ${student.course === 'Digital Marketing' ? 'selected' : ''}>Digital Marketing</option>
-                            <option value="UI/UX Design" ${student.course === 'UI/UX Design' ? 'selected' : ''}>UI/UX Design</option>
-                            <option value="Business Analytics" ${student.course === 'Business Analytics' ? 'selected' : ''}>Business Analytics</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="editAmount">Amount ($) *</label>
-                        <input type="number" id="editAmount" value="${student.amount}" min="0" step="10">
-                    </div>
-                    <div class="form-group">
-                        <label for="editPaymentStatus">Payment Status *</label>
-                        <select id="editPaymentStatus">
-                            <option value="Paid" ${student.paymentStatus === 'Paid' ? 'selected' : ''}>Paid</option>
-                            <option value="Pending" ${student.paymentStatus === 'Pending' ? 'selected' : ''}>Pending</option>
-                            <option value="Partial" ${student.paymentStatus === 'Partial' ? 'selected' : ''}>Partial Payment</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="editDueDate">Due Date</label>
-                        <input type="date" id="editDueDate" value="${student.dueDate || ''}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="editNotes">Additional Notes</label>
-                    <textarea id="editNotes" rows="3">${student.notes || ''}</textarea>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" onclick="saveStudentEdit(${studentId})">
-                        <i class="fas fa-save"></i> Save Changes
-                    </button>
-                    <button class="btn" onclick="closeModal('editModal')">Cancel</button>
-                </div>
-            `;
-            
-            openModal('editModal');
-        }
+      <div class="use-card">
+        <div class="icon">🍚</div>
+        <h3>Rice & Biryani</h3>
+        <p>
+          Add beautiful colour and a delicate aroma
+          to rice dishes and biryani.
+        </p>
+      </div>
 
-        // Save edited student
-        function saveStudentEdit(studentId) {
-            const studentIndex = students.findIndex(s => s.id === studentId);
-            if (studentIndex === -1) return;
-            
-            const updatedStudent = {
-                ...students[studentIndex],
-                name: document.getElementById('editName').value.trim(),
-                email: document.getElementById('editEmail').value.trim(),
-                course: document.getElementById('editCourse').value,
-                amount: parseFloat(document.getElementById('editAmount').value),
-                paymentStatus: document.getElementById('editPaymentStatus').value,
-                dueDate: document.getElementById('editDueDate').value,
-                notes: document.getElementById('editNotes').value.trim()
-            };
-            
-            // Validate
-            if (!updatedStudent.name || !updatedStudent.course || !updatedStudent.amount) {
-                showToast('Please fill in all required fields', 'error');
-                return;
-            }
-            
-            students[studentIndex] = updatedStudent;
-            saveData();
-            renderStudents();
-            updateStats();
-            closeModal('editModal');
-            showToast('Student updated successfully', 'success');
-        }
+      <div class="use-card">
+        <div class="icon">🍰</div>
+        <h3>Desserts</h3>
+        <p>
+          Create memorable desserts, cakes,
+          puddings and traditional sweets.
+        </p>
+      </div>
 
-        // Delete student
-        function deleteStudent(studentId) {
-            if (!confirm('Are you sure you want to delete this student? This action cannot be undone.')) {
-                return;
-            }
-            
-            const studentIndex = students.findIndex(s => s.id === studentId);
-            if (studentIndex === -1) return;
-            
-            const studentName = students[studentIndex].name;
-            students.splice(studentIndex, 1);
-            
-            // Also delete associated sessions
-            sessions = sessions.filter(s => s.studentId !== studentId);
-            
-            saveData();
-            renderStudents();
-            updateStats();
-            populateStudentDropdown();
-            renderSessions();
-            showToast(`Student "${studentName}" deleted successfully`, 'success');
-        }
+      <div class="use-card">
+        <div class="icon">☕</div>
+        <h3>Drinks & Infusions</h3>
+        <p>
+          Explore saffron in warm drinks,
+          milk preparations and infusions.
+        </p>
+      </div>
 
-        // Mark attendance
-        function markAttendance(studentId, status) {
-            const student = students.find(s => s.id === studentId);
-            if (!student) return;
-            
-            student.attendance.push({
-                date: new Date().toISOString().split('T')[0],
-                status: status
-            });
-            
-            saveData();
-            viewProfile(studentId); // Refresh profile view
-            showToast(`Attendance marked as ${status}`, 'success');
-        }
+    </div>
+  </div>
+</section>
 
-        // Generate invoice
-        function generateInvoice(studentId) {
-            const student = students.find(s => s.id === studentId);
-            if (!student) return;
-            
-            const invoiceNumber = 'INV-' + Date.now().toString().slice(-6);
-            const issueDate = new Date().toISOString().split('T')[0];
-            
-            document.getElementById('invoiceContent').innerHTML = `
-                <div class="invoice">
-                    <div class="invoice-header">
-                        <div>
-                            <h2>INVOICE</h2>
-                            <p><strong>Invoice #:</strong> ${invoiceNumber}</p>
-                            <p><strong>Issue Date:</strong> ${formatDate(issueDate)}</p>
-                        </div>
-                        <div style="text-align: right;">
-                            <h3>LionFuel Academy</h3>
-                            <p>123 Education Street</p>
-                            <p>Knowledge City, KC 10101</p>
-                            <p>contact@lionfuel.edu</p>
-                        </div>
-                    </div>
-                    
-                    <div style="margin: 30px 0;">
-                        <div style="margin-bottom: 15px;">
-                            <strong>Bill To:</strong>
-                            <p>${student.name}</p>
-                            ${student.email ? `<p>${student.email}</p>` : ''}
-                            ${student.phone ? `<p>${student.phone}</p>` : ''}
-                        </div>
-                    </div>
-                    
-                    <div class="invoice-body">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Description</th>
-                                    <th>Course</th>
-                                    <th>Join Date</th>
-                                    <th>Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Tuition Fee - ${student.course}</td>
-                                    <td>${student.course}</td>
-                                    <td>${formatDate(student.joinDate)}</td>
-                                    <td>$${student.amount.toFixed(2)}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <div class="invoice-total">
-                        <p>Total Amount: <strong>$${student.amount.toFixed(2)}</strong></p>
-                        <p>Status: <span class="status ${student.paymentStatus === 'Paid' ? 'status-paid' : 'status-pending'}">${student.paymentStatus}</span></p>
-                        ${student.dueDate ? `<p>Due Date: ${formatDate(student.dueDate)}</p>` : ''}
-                    </div>
-                    
-                    <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd;">
-                        <p><strong>Payment Instructions:</strong></p>
-                        <p>Please make payment via ${student.paymentMethod} within 7 days of invoice date.</p>
-                        <p>Thank you for choosing LionFuel Academy!</p>
-                    </div>
-                </div>
-            `;
-            
-            openModal('invoiceModal');
-        }
+<!-- DELIVERY -->
 
-        // Print invoice
-        function printInvoice() {
-            const printContent = document.getElementById('invoiceContent').innerHTML;
-            const originalContent = document.body.innerHTML;
-            
-            document.body.innerHTML = printContent;
-            window.print();
-            document.body.innerHTML = originalContent;
-            
-            // Re-initialize the UI
-            init();
-        }
+<section class="delivery" id="delivery">
+  <div class="container">
 
-        // Schedule a session
-        function scheduleSession() {
-            const studentId = parseInt(sessionStudentSelect.value);
-            const date = document.getElementById('sessionDate').value;
-            const time = document.getElementById('sessionTime').value;
-            const duration = document.getElementById('sessionDuration').value;
-            const notes = document.getElementById('sessionNotes').value.trim();
-            
-            // Validation
-            if (!studentId || !date || !time) {
-                showToast('Please select a student, date, and time', 'error');
-                return;
-            }
-            
-            const student = students.find(s => s.id === studentId);
-            if (!student) return;
-            
-            const session = {
-                id: Date.now(),
-                studentId,
-                studentName: student.name,
-                date,
-                time,
-                duration: parseInt(duration),
-                notes,
-                status: 'Scheduled',
-                createdAt: new Date().toISOString()
-            };
-            
-            sessions.push(session);
-            saveData();
-            renderSessions();
-            generateCalendar();
-            
-            // Clear form
-            document.getElementById('sessionDate').value = '';
-            document.getElementById('sessionTime').value = '';
-            document.getElementById('sessionNotes').value = '';
-            
-            showToast(`Session scheduled for ${student.name}`, 'success');
-        }
+    <div class="delivery-icon">🚚</div>
 
-        // Generate session message
-        function generateSessionMessage() {
-            const studentId = parseInt(sessionStudentSelect.value);
-            const date = document.getElementById('sessionDate').value;
-            const time = document.getElementById('sessionTime').value;
-            const duration = document.getElementById('sessionDuration').value;
-            
-            if (!studentId || !date || !time) {
-                showToast('Please select a student, date, and time first', 'error');
-                return;
-            }
-            
-            const student = students.find(s => s.id === studentId);
-            const formattedDate = formatDate(date);
-            const formattedTime = formatTime(time);
-            
-            const message = `Hello ${student.name},
+    <div class="eyebrow">We deliver across the island</div>
 
-This is a reminder about your upcoming session at LionFuel Academy.
+    <h2>From Our Hands to Your Home.</h2>
 
-Date: ${formattedDate}
-Time: ${formattedTime}
-Duration: ${duration} minutes
+    <p>
+      Enjoy the convenience of ordering Iranian saffron
+      from anywhere in Mauritius. Contact our team on
+      WhatsApp to confirm availability, delivery charges
+      and estimated delivery time for your location.
+    </p>
 
-Please ensure you have completed any pre-session assignments and have the necessary materials ready.
+    <a class="btn btn-gold"
+       href="https://wa.me/23058251875?text=Hello%2C%20I%20would%20like%20to%20know%20about%20saffron%20delivery%20to%20my%20area%20in%20Mauritius.">
+      CHECK DELIVERY →
+    </a>
 
-If you need to reschedule, please contact us at least 24 hours in advance.
+  </div>
+</section>
 
-We look forward to our session!
+<!-- FAQ -->
 
-Best regards,
-LionFuel Academy Team
-contact@lionfuel.edu
-(123) 456-7890`;
-            
-            document.getElementById('messageContent').textContent = message;
-            document.getElementById('sessionMessage').classList.remove('hidden');
-        }
+<section class="faq">
+  <div class="container">
 
-        // Copy session message to clipboard
-        function copySessionMessage() {
-            const message = document.getElementById('messageContent').textContent;
-            navigator.clipboard.writeText(message).then(() => {
-                showToast('Message copied to clipboard!', 'success');
-            });
-        }
+    <div class="section-heading">
+      <div class="eyebrow">Good to know</div>
+      <h2>Frequently Asked Questions</h2>
+    </div>
 
-        // Render sessions table
-        function renderSessions() {
-            sessionsTableBody.innerHTML = '';
-            
-            // Sort sessions by date (soonest first)
-            const sortedSessions = [...sessions].sort((a, b) => {
-                const dateA = new Date(`${a.date}T${a.time}`);
-                const dateB = new Date(`${b.date}T${b.time}`);
-                return dateA - dateB;
-            });
-            
-            if (sortedSessions.length === 0) {
-                sessionsTableBody.innerHTML = `
-                    <tr>
-                        <td colspan="6" class="text-center" style="padding: 40px;">
-                            <i class="fas fa-calendar" style="font-size: 2rem; margin-bottom: 10px; color: var(--gray);"></i>
-                            <p>No sessions scheduled. Schedule your first session above.</p>
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
-            
-            sortedSessions.forEach(session => {
-                // Check if session is upcoming or past
-                const sessionDateTime = new Date(`${session.date}T${session.time}`);
-                const now = new Date();
-                const isPast = sessionDateTime < now;
-                
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${session.studentName}</td>
-                    <td>${formatDate(session.date)}</td>
-                    <td>${formatTime(session.time)}</td>
-                    <td>${session.duration} min</td>
-                    <td>
-                        <span class="status ${isPast ? 'status-pending' : 'status-paid'}">
-                            ${isPast ? 'Completed' : 'Upcoming'}
-                        </span>
-                    </td>
-                    <td class="actions">
-                        <button class="btn btn-sm btn-danger" onclick="deleteSession(${session.id})">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                `;
-                sessionsTableBody.appendChild(row);
-            });
-        }
+    <div class="faq-list">
 
-        // Delete a session
-        function deleteSession(sessionId) {
-            if (!confirm('Are you sure you want to delete this session?')) {
-                return;
-            }
-            
-            const sessionIndex = sessions.findIndex(s => s.id === sessionId);
-            if (sessionIndex === -1) return;
-            
-            sessions.splice(sessionIndex, 1);
-            saveData();
-            renderSessions();
-            generateCalendar();
-            showToast('Session deleted successfully', 'success');
-        }
+      <details>
+        <summary>Where does your saffron come from?</summary>
+        <p>
+          Our saffron is imported from Iran.
+          Contact us for available product details and origin information.
+        </p>
+      </details>
 
-        // Populate student dropdown for sessions
-        function populateStudentDropdown() {
-            sessionStudentSelect.innerHTML = '<option value="">Select Student</option>';
-            students.forEach(student => {
-                const option = document.createElement('option');
-                option.value = student.id;
-                option.textContent = `${student.name} (${student.course})`;
-                sessionStudentSelect.appendChild(option);
-            });
-        }
+      <details>
+        <summary>Do you deliver throughout Mauritius?</summary>
+        <p>
+          We offer delivery across Mauritius.
+          Please contact us to confirm your area, delivery fee
+          and estimated delivery time.
+        </p>
+      </details>
 
-        // Generate calendar
-        function generateCalendar() {
-            const calendarGrid = document.querySelector('.calendar-grid');
-            // Clear existing dates (keep day headers)
-            while (calendarGrid.children.length > 7) {
-                calendarGrid.removeChild(calendarGrid.lastChild);
-            }
-            
-            // Update month display
-            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            document.getElementById('currentMonth').textContent = `${monthNames[currentMonth]} ${currentYear}`;
-            
-            // Get first day of month and total days
-            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
-            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-            
-            // Add empty cells for days before the first day
-            for (let i = 0; i < firstDay; i++) {
-                const emptyDiv = document.createElement('div');
-                emptyDiv.classList.add('calendar-date');
-                emptyDiv.style.visibility = 'hidden';
-                calendarGrid.appendChild(emptyDiv);
-            }
-            
-            // Add cells for each day of the month
-            const today = new Date();
-            const isCurrentMonth = today.getMonth() === currentMonth && today.getFullYear() === currentYear;
-            
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dateDiv = document.createElement('div');
-                dateDiv.classList.add('calendar-date');
-                dateDiv.textContent = day;
-                
-                // Check if today
-                if (isCurrentMonth && day === today.getDate()) {
-                    dateDiv.classList.add('today');
-                }
-                
-                // Check if there are sessions on this day
-                const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                const daySessions = sessions.filter(s => s.date === dateStr);
-                
-                if (daySessions.length > 0) {
-                    dateDiv.classList.add('has-session');
-                    const sessionDot = document.createElement('div');
-                    sessionDot.classList.add('session-dot');
-                    sessionDot.title = `${daySessions.length} session(s) scheduled`;
-                    dateDiv.appendChild(sessionDot);
-                    
-                    // Add click to view sessions
-                    dateDiv.onclick = () => {
-                        alert(`Sessions on ${dateStr}:\n${daySessions.map(s => `• ${s.studentName} at ${s.time}`).join('\n')}`);
-                    };
-                }
-                
-                calendarGrid.appendChild(dateDiv);
-            }
-        }
+      <details>
+        <summary>How can I order saffron?</summary>
+        <p>
+          Simply click the WhatsApp order button, tell us
+          which product you are interested in, and our team
+          will assist you.
+        </p>
+      </details>
 
-        // Navigate calendar months
-        function prevMonth() {
-            currentMonth--;
-            if (currentMonth < 0) {
-                currentMonth = 11;
-                currentYear--;
-            }
-            generateCalendar();
-        }
+      <details>
+        <summary>Do you supply restaurants and hotels?</summary>
+        <p>
+          Yes, businesses can contact us to enquire about
+          supply options and wholesale pricing.
+        </p>
+      </details>
 
-        function nextMonth() {
-            currentMonth++;
-            if (currentMonth > 11) {
-                currentMonth = 0;
-                currentYear++;
-            }
-            generateCalendar();
-        }
+      <details>
+        <summary>How can I find out the price?</summary>
+        <p>
+          Send us a WhatsApp message for current prices,
+          pack sizes and availability.
+        </p>
+      </details>
 
-        // Filter and search students
-        function filterStudents() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const statusFilter = filterStatus.value;
-            const courseFilter = filterCourse.value;
-            
-            const filtered = students.filter(student => {
-                // Search term filter
-                const matchesSearch = !searchTerm || 
-                    student.name.toLowerCase().includes(searchTerm) ||
-                    (student.email && student.email.toLowerCase().includes(searchTerm)) ||
-                    student.course.toLowerCase().includes(searchTerm);
-                
-                // Status filter
-                const matchesStatus = statusFilter === 'all' || student.paymentStatus === statusFilter;
-                
-                // Course filter
-                const matchesCourse = courseFilter === 'all' || student.course === courseFilter;
-                
-                return matchesSearch && matchesStatus && matchesCourse;
-            });
-            
-            renderStudents(filtered);
-        }
+    </div>
+  </div>
+</section>
 
-        // Export data
-        function exportData() {
-            const dataStr = JSON.stringify({
-                students: students,
-                sessions: sessions,
-                exportedAt: new Date().toISOString()
-            }, null, 2);
-            
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
-            const url = URL.createObjectURL(dataBlob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `lionfuel_data_${new Date().toISOString().split('T')[0]}.json`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            showToast('Data exported successfully', 'success');
-        }
+<!-- CONTACT -->
 
-        // Modal functions
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('active');
-        }
+<section class="contact" id="contact">
+  <div class="container">
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
-        }
+    <div class="eyebrow">Your journey begins here</div>
 
-        // Toast notification
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toastMessage');
-            
-            toastMessage.textContent = message;
-            toast.className = 'toast';
-            
-            // Set type-specific class and icon
-            let iconClass = 'fas fa-check-circle';
-            if (type === 'error') {
-                iconClass = 'fas fa-exclamation-circle';
-                toast.classList.add('toast-error');
-            } else if (type === 'info') {
-                iconClass = 'fas fa-info-circle';
-                toast.classList.add('toast-info');
-            } else {
-                toast.classList.add('toast-success');
-            }
-            
-            toast.querySelector('i').className = iconClass;
-            toast.classList.add('show');
-            
-            // Hide after 3 seconds
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
+    <h2>Discover the Gold of Iran.</h2>
 
-        // Save data to localStorage
-        function saveData() {
-            localStorage.setItem('lionfuel_students', JSON.stringify(students));
-            localStorage.setItem('lionfuel_sessions', JSON.stringify(sessions));
-        }
+    <p>
+      Ready to experience premium Iranian saffron?
+      Contact Zafran Gold Mauritius today.
+      We look forward to serving you.
+    </p>
 
-        // Format date
-        function formatDate(dateString) {
-            if (!dateString) return 'N/A';
-            const options = { year: 'numeric', month: 'short', day: 'numeric' };
-            return new Date(dateString).toLocaleDateString('en-US', options);
-        }
+    <a class="btn btn-gold"
+       href="https://wa.me/23058251875?text=Hello%20Zafran%20Gold%20Mauritius%2C%20I%20would%20like%20to%20place%20an%20order.">
+      ORDER NOW ON WHATSAPP →
+    </a>
 
-        // Format time
-        function formatTime(timeString) {
-            if (!timeString) return 'N/A';
-            const [hours, minutes] = timeString.split(':');
-            const hour = parseInt(hours);
-            const ampm = hour >= 12 ? 'PM' : 'AM';
-            const displayHour = hour % 12 || 12;
-            return `${displayHour}:${minutes} ${ampm}`;
-        }
+    <div class="contact-details">
+      WHATSAPP / PHONE<br>
+      <a href="https://wa.me/23058251875">+230 5825 1875</a>
+      <br><br>
 
-        // Load sample data for demonstration
-        function loadSampleData() {
-            const sampleStudents = [
-                {
-                    id: 1001,
-                    name: 'Alex Johnson',
-                    email: 'alex.j@example.com',
-                    phone: '+1 (234) 567-8901',
-                    joinDate: '2023-05-15',
-                    course: 'Web Development',
-                    amount: 1200,
-                    paymentMethod: 'Credit Card',
-                    paymentStatus: 'Paid',
-                    dueDate: '2023-06-15',
-                    notes: 'Excellent student, always completes assignments on time.',
-                    attendance: [
-                        { date: '2023-05-20', status: 'Present' },
-                        { date: '2023-05-27', status: 'Present' },
-                        { date: '2023-06-03', status: 'Present' }
-                    ]
-                },
-                {
-                    id: 1002,
-                    name: 'Maria Garcia',
-                    email: 'maria.g@example.com',
-                    phone: '+1 (345) 678-9012',
-                    joinDate: '2023-06-01',
-                    course: 'Data Science',
-                    amount: 1500,
-                    paymentMethod: 'Bank Transfer',
-                    paymentStatus: 'Pending',
-                    dueDate: '2023-07-01',
-                    notes: 'Needs extra help with statistics concepts.',
-                    attendance: [
-                        { date: '2023-06-05', status: 'Present' },
-                        { date: '2023-06-12', status: 'Absent' },
-                        { date: '2023-06-19', status: 'Present' }
-                    ]
-                },
-                {
-                    id: 1003,
-                    name: 'David Smith',
-                    email: 'david.s@example.com',
-                    phone: '+1 (456) 789-0123',
-                    joinDate: '2023-04-10',
-                    course: 'Digital Marketing',
-                    amount: 900,
-                    paymentMethod: 'PayPal',
-                    paymentStatus: 'Partial',
-                    dueDate: '2023-05-10',
-                    notes: 'Paid $500, remaining $400 due next month.',
-                    attendance: [
-                        { date: '2023-04-15', status: 'Present' },
-                        { date: '2023-04-22', status: 'Present' },
-                        { date: '2023-04-29', status: 'Present' },
-                        { date: '2023-05-06', status: 'Present' }
-                    ]
-                }
-            ];
-            
-            const sampleSessions = [
-                {
-                    id: 2001,
-                    studentId: 1001,
-                    studentName: 'Alex Johnson',
-                    date: new Date().toISOString().split('T')[0],
-                    time: '14:00',
-                    duration: 60,
-                    notes: 'Advanced JavaScript concepts',
-                    status: 'Scheduled'
-                },
-                {
-                    id: 2002,
-                    studentId: 1002,
-                    studentName: 'Maria Garcia',
-                    date: new Date(Date.now() + 86400000).toISOString().split('T')[0], // Tomorrow
-                    time: '10:30',
-                    duration: 90,
-                    notes: 'Python pandas library',
-                    status: 'Scheduled'
-                },
-                {
-                    id: 2003,
-                    studentId: 1003,
-                    studentName: 'David Smith',
-                    date: new Date(Date.now() + 172800000).toISOString().split('T')[0], // Day after tomorrow
-                    time: '16:00',
-                    duration: 60,
-                    notes: 'SEO optimization techniques',
-                    status: 'Scheduled'
-                }
-            ];
-            
-            students = sampleStudents;
-            sessions = sampleSessions;
-            saveData();
-            showToast('Sample data loaded successfully', 'info');
-        }
+      EMAIL<br>
+      <a href="mailto:bookings@superdealsmauritius.com">
+        bookings@superdealsmauritius.com
+      </a>
 
-        // Close modals when clicking outside
-        window.onclick = function(event) {
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => {
-                if (event.target === modal) {
-                    modal.classList.remove('active');
-                }
-            });
-        };
+      <br><br>
+      MAURITIUS · ISLANDWIDE DELIVERY
+    </div>
 
-        // Initialize when page loads
-        window.onload = init;
-    </script>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="container">
+
+    <a href="#home" class="logo">
+      ZAFRAN GOLD
+      <small>MAURITIUS</small>
+    </a>
+
+    <div class="footer-links">
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#delivery">Delivery</a>
+      <a href="#contact">Contact</a>
+      <a href="mailto:bookings@superdealsmauritius.com">Email</a>
+    </div>
+
+    <p>
+      © <span id="year"></span> Zafran Gold Mauritius.
+      All rights reserved.
+    </p>
+
+    <p>
+      Premium Iranian Saffron · Mauritius
+    </p>
+
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+
+<a class="whatsapp-float"
+   href="https://wa.me/23058251875?text=Hello%20Zafran%20Gold%20Mauritius%2C%20I%20am%20interested%20in%20your%20Iranian%20saffron."
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Order saffron on WhatsApp">
+  ☎ WhatsApp Order
+</a>
+
+<script>
+function toggleMenu() {
+  document.getElementById("navlinks").classList.toggle("active");
+}
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+</script>
+
 </body>
 </html>
