@@ -3,26 +3,28 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Indian Saffron Mauritius | Zafran Gold – Grade A Dry Saffron</title>
+<title>Bavah Premium Safron Mauritius | Buy Indian Saffron</title>
 
-<meta name="description" content="Discover Zafran Gold Mauritius premium Grade A commercial Indian saffron. Naturally dried saffron made from the original flower. Ideal for biryani, rice, cooking and desserts. Order on WhatsApp with delivery across Mauritius.">
+<meta name="description" content="Buy Bavah Premium Safron in Mauritius. Discover Grade A commercial Indian saffron, naturally dried from the original flower. Perfect for biryani, rice, cooking and desserts. Order on WhatsApp.">
 
-<meta name="keywords" content="Indian saffron Mauritius, buy saffron Mauritius, dry saffron Mauritius, Grade A saffron, Zafran Mauritius, saffron for biryani Mauritius, safran indien Maurice, acheter safran Maurice">
+<meta name="keywords" content="Bavah Premium Safron, Indian saffron Mauritius, buy saffron Mauritius, dry saffron Mauritius, Grade A saffron Mauritius, saffron for biryani, safron Maurice, Indian saffron delivery">
 
-<meta name="author" content="Zafran Gold Mauritius">
+<meta name="author" content="Bavah Premium Safron">
+
 <meta name="theme-color" content="#100b08">
 
-<meta property="og:title" content="Zafran Gold Mauritius | Premium Indian Saffron">
-<meta property="og:description" content="Naturally dried Grade A commercial Indian saffron. Discover the natural colour and aroma of saffron. Order on WhatsApp.">
-<meta property="og:image" content="zafran.jpg">
+<meta property="og:title" content="Bavah Premium Safron Mauritius">
+<meta property="og:description" content="Discover naturally dried Grade A commercial Indian saffron. Order today with delivery across Mauritius.">
+<meta property="og:image" content="my%20image/zafran.jpg">
 <meta property="og:type" content="website">
 
 <style>
+
 :root {
   --black:#100b08;
-  --dark:#1d120d;
+  --dark:#1c130d;
   --gold:#d5ad59;
   --lightgold:#f5dfa4;
   --cream:#f8f1e5;
@@ -35,7 +37,9 @@
   box-sizing:border-box;
 }
 
-html { scroll-behavior:smooth; }
+html {
+  scroll-behavior:smooth;
+}
 
 body {
   background:var(--black);
@@ -54,7 +58,9 @@ a {
   margin:auto;
 }
 
-.gold { color:var(--gold); }
+.gold {
+  color:var(--gold);
+}
 
 .eyebrow {
   color:var(--gold);
@@ -74,7 +80,7 @@ header {
 }
 
 .nav {
-  height:82px;
+  min-height:82px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -83,17 +89,17 @@ header {
 .logo {
   color:var(--lightgold);
   font-size:23px;
-  letter-spacing:3px;
+  letter-spacing:2px;
   font-weight:bold;
-  line-height:1.1;
+  line-height:1.2;
 }
 
 .logo small {
   display:block;
   text-align:center;
   font:10px Arial,sans-serif;
-  letter-spacing:6px;
-  margin-top:6px;
+  letter-spacing:5px;
+  margin-top:5px;
   color:white;
 }
 
@@ -106,7 +112,9 @@ header {
   letter-spacing:1px;
 }
 
-.navlinks a:hover { color:var(--gold); }
+.navlinks a:hover {
+  color:var(--gold);
+}
 
 .nav-cta {
   border:1px solid var(--gold);
@@ -154,25 +162,40 @@ header {
 /* HERO */
 
 .hero {
-  min-height:690px;
   position:relative;
+  min-height:690px;
   display:flex;
   align-items:center;
   overflow:hidden;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(12,8,6,.97) 0%,
-      rgba(12,8,6,.85) 45%,
-      rgba(12,8,6,.30) 100%
-    ),
-    url("zafran.jpg") center/cover no-repeat;
+}
+
+.hero-image {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  z-index:0;
+}
+
+.hero::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:linear-gradient(
+    90deg,
+    rgba(12,8,6,.97) 0%,
+    rgba(12,8,6,.88) 45%,
+    rgba(12,8,6,.40) 100%
+  );
 }
 
 .hero-content {
   position:relative;
   z-index:2;
-  max-width:690px;
+  max-width:720px;
   padding:100px 0;
 }
 
@@ -190,7 +213,7 @@ header {
 }
 
 .hero p {
-  max-width:540px;
+  max-width:550px;
   color:#e0d2bd;
   font-size:17px;
   margin-bottom:32px;
@@ -199,7 +222,7 @@ header {
 .hero-note {
   color:var(--gold);
   font:11px Arial,sans-serif;
-  letter-spacing:3px;
+  letter-spacing:2px;
   margin-top:25px;
 }
 
@@ -222,7 +245,9 @@ header {
   border-right:1px solid #60451f;
 }
 
-.trust-item:last-child { border:none; }
+.trust-item:last-child {
+  border:none;
+}
 
 .trust-item strong {
   display:block;
@@ -239,7 +264,9 @@ header {
 
 /* SECTIONS */
 
-section { padding:95px 0; }
+section {
+  padding:90px 0;
+}
 
 .section-heading {
   text-align:center;
@@ -254,11 +281,11 @@ section { padding:95px 0; }
 
 .section-heading p {
   color:var(--muted);
-  max-width:620px;
+  max-width:650px;
   margin:auto;
 }
 
-/* PRODUCT */
+/* PRODUCTS */
 
 .products {
   background:var(--cream);
@@ -269,128 +296,117 @@ section { padding:95px 0; }
   color:#766650;
 }
 
-.product-grid {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:25px;
-}
-
-.product-card {
+.product-panel {
+  max-width:750px;
+  margin:auto;
+  padding:45px 35px;
+  text-align:center;
   background:#fffaf1;
   border:1px solid #e7d5ad;
-  padding:22px;
-  text-align:center;
-  transition:.3s;
+  box-shadow:0 15px 35px #53351115;
 }
 
-.product-card:hover {
-  transform:translateY(-7px);
-  box-shadow:0 15px 35px #53351120;
+.product-panel h3 {
+  font-size:32px;
+  margin:15px 0;
 }
 
-.product-image {
-  width:100%;
-  height:225px;
-  object-fit:cover;
-  display:block;
-  margin-bottom:22px;
-}
-
-.product-card h3 {
-  font-size:23px;
-  margin-bottom:10px;
-}
-
-.product-card p {
-  font:13px Arial,sans-serif;
+.product-panel p {
   color:#756650;
-  min-height:65px;
+  font:14px/1.9 Arial,sans-serif;
+  max-width:580px;
+  margin:0 auto 25px;
 }
 
-.product-card .btn {
-  margin-top:20px;
-  width:100%;
+.product-label {
+  display:inline-block;
+  border:1px solid #b38b40;
+  padding:8px 16px;
+  color:#8b6426;
+  font:bold 11px Arial,sans-serif;
+  letter-spacing:2px;
 }
 
-/* PRODUCT FEATURES */
+/* QUALITY */
 
-.features {
+.quality {
   background:#15100c;
 }
 
-.feature-grid {
+.quality-grid {
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:20px;
 }
 
-.feature {
-  padding:28px;
+.quality-card {
+  padding:30px;
   border:1px solid #654b25;
   background:#1c150f;
 }
 
-.feature h3 {
+.quality-card h3 {
   color:var(--lightgold);
   font-size:21px;
   font-weight:normal;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
-.feature p {
+.quality-card p {
   color:#c6b69e;
   font-size:14px;
 }
 
-.feature .symbol {
-  font-size:28px;
+.quality-card .symbol {
+  font-size:30px;
   margin-bottom:12px;
 }
 
 /* STORY */
 
-.story { background:#21170f; }
-
-.story-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:65px;
-  align-items:center;
+.story {
+  background:#21170f;
 }
 
-.story-photo {
-  width:100%;
-  display:block;
-  border:1px solid var(--gold);
-  box-shadow:0 15px 40px #0008;
+.story-text {
+  max-width:850px;
+  margin:auto;
+  text-align:center;
 }
 
 .story-text h2 {
-  font-size:clamp(34px,4vw,50px);
+  font-size:clamp(35px,5vw,53px);
   line-height:1.2;
   font-weight:normal;
-  margin:15px 0 25px;
+  margin:20px 0;
 }
 
 .story-text p {
   color:#c8baa3;
-  font-size:15px;
-  margin-bottom:17px;
+  font-size:16px;
+  margin:18px auto;
+  max-width:750px;
 }
 
 .points {
-  margin-top:25px;
-  color:var(--lightgold);
+  margin-top:30px;
   display:grid;
-  gap:10px;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+  color:var(--lightgold);
   font-size:14px;
 }
 
 /* COOKING */
 
-.cooking { background:var(--cream); color:#21170e; }
+.cooking {
+  background:var(--cream);
+  color:#21170e;
+}
 
-.cooking .section-heading p { color:#766650; }
+.cooking .section-heading p {
+  color:#766650;
+}
 
 .cooking-grid {
   display:grid;
@@ -399,7 +415,7 @@ section { padding:95px 0; }
 }
 
 .cooking-card {
-  padding:32px 22px;
+  padding:35px 22px;
   text-align:center;
   border:1px solid #e1cfa8;
   background:#fffaf1;
@@ -418,10 +434,10 @@ section { padding:95px 0; }
 .cooking-card p {
   font-size:13px;
   color:#766650;
-  margin-top:10px;
+  margin-top:12px;
 }
 
-/* CUSTOMER SATISFACTION */
+/* CUSTOMER CARE */
 
 .feedback {
   background:#21170f;
@@ -435,7 +451,7 @@ section { padding:95px 0; }
 }
 
 .feedback p {
-  max-width:680px;
+  max-width:700px;
   margin:15px auto 30px;
   color:#c9b99f;
 }
@@ -460,7 +476,9 @@ section { padding:95px 0; }
   margin:15px auto 30px;
 }
 
-.delivery .eyebrow { color:#98702c; }
+.delivery .eyebrow {
+  color:#98702c;
+}
 
 .delivery-icon {
   font-size:50px;
@@ -469,7 +487,9 @@ section { padding:95px 0; }
 
 /* FAQ */
 
-.faq { background:#15100c; }
+.faq {
+  background:#15100c;
+}
 
 .faq-list {
   max-width:800px;
@@ -496,9 +516,7 @@ details p {
 /* CONTACT */
 
 .contact {
-  background:
-    linear-gradient(#160d08e8,#160d08e8),
-    url("zafran.jpg") center/cover;
+  background:#1b100a;
   text-align:center;
 }
 
@@ -510,7 +528,7 @@ details p {
 
 .contact p {
   color:#d0c0a6;
-  max-width:600px;
+  max-width:650px;
   margin:0 auto 30px;
 }
 
@@ -561,13 +579,17 @@ footer p {
   box-shadow:0 5px 25px #0008;
 }
 
-.whatsapp:hover { background:#159c50; }
+.whatsapp:hover {
+  background:#159c50;
+}
 
 /* MOBILE */
 
 @media(max-width:800px) {
 
-  .menu-btn { display:block; }
+  .menu-btn {
+    display:block;
+  }
 
   .navlinks {
     display:none;
@@ -581,106 +603,131 @@ footer p {
     gap:20px;
   }
 
-  .navlinks.active { display:flex; }
+  .navlinks.active {
+    display:flex;
+  }
 
   .hero {
     min-height:650px;
-    background-position:60% center;
   }
 
-  .hero-content { padding:75px 0; }
-
-  .hero p { font-size:15px; }
-
-  .product-grid,
-  .feature-grid,
-  .story-grid,
-  .cooking-grid {
-    grid-template-columns:1fr;
+  .hero-content {
+    padding:75px 0;
   }
 
-  .story-grid { gap:35px; }
+  .hero p {
+    font-size:15px;
+  }
 
   .trust-grid {
     grid-template-columns:repeat(2,1fr);
+  }
+
+  .quality-grid,
+  .cooking-grid,
+  .points {
+    grid-template-columns:1fr;
   }
 
   .trust-item {
     border-bottom:1px solid #60451f;
   }
 
-  section { padding:70px 0; }
+  section {
+    padding:70px 0;
+  }
 
-  .btn-outline { margin:12px 0 0; }
+  .btn-outline {
+    margin:12px 0 0;
+  }
+
+  .product-panel {
+    padding:30px 20px;
+  }
 }
 
 @media(prefers-reduced-motion:reduce) {
-  html { scroll-behavior:auto; }
-  *,*::before,*::after { transition:none!important; }
+  html {
+    scroll-behavior:auto;
+  }
+  *,*::before,*::after {
+    transition:none!important;
+  }
 }
+
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
+
 <header>
-  <div class="container nav">
+<div class="container nav">
 
-    <a href="#home" class="logo">
-      ZAFRAN GOLD
-      <small>MAURITIUS</small>
-    </a>
+  <a href="#home" class="logo">
+    BAVAH
+    <small>PREMIUM SAFRON</small>
+  </a>
 
-    <button class="menu-btn"
-      onclick="toggleMenu()"
-      aria-label="Open menu">☰</button>
+  <button class="menu-btn"
+    onclick="toggleMenu()"
+    aria-label="Open menu">☰</button>
 
-    <nav class="navlinks" id="navlinks">
-      <a href="#home" onclick="toggleMenu()">Home</a>
-      <a href="#products" onclick="toggleMenu()">Our Saffron</a>
-      <a href="#quality" onclick="toggleMenu()">Our Quality</a>
-      <a href="#cooking" onclick="toggleMenu()">Uses</a>
-      <a href="#delivery" onclick="toggleMenu()">Delivery</a>
-      <a href="#contact" class="nav-cta" onclick="toggleMenu()">Contact</a>
-    </nav>
+  <nav class="navlinks" id="navlinks">
+    <a href="#home" onclick="toggleMenu()">Home</a>
+    <a href="#products" onclick="toggleMenu()">Product</a>
+    <a href="#quality" onclick="toggleMenu()">Quality</a>
+    <a href="#cooking" onclick="toggleMenu()">Uses</a>
+    <a href="#delivery" onclick="toggleMenu()">Delivery</a>
+    <a href="#contact" class="nav-cta" onclick="toggleMenu()">Contact</a>
+  </nav>
 
-  </div>
+</div>
 </header>
 
 <main>
 
-<!-- HERO -->
+<!-- HERO: THE ONLY PRODUCT IMAGE -->
 
 <section class="hero" id="home">
+
+  <img
+    class="hero-image"
+    src="my%20image/zafran.jpg"
+    alt="Bavah Premium Safron Indian naturally dried saffron">
+
   <div class="container">
     <div class="hero-content">
 
-      <div class="eyebrow">The Natural Treasure of India</div>
+      <div class="eyebrow">
+        The Natural Treasure of India
+      </div>
 
       <h1>
         Discover the
-        <span>Golden Beauty</span>
-        of Saffron.
+        <span>Golden Touch.</span>
+        Of Nature.
       </h1>
 
       <p>
-        Experience Grade A commercial Indian saffron,
-        naturally dried from the original flower.
-        A beautiful natural addition to biryani, rice,
-        desserts and your favourite dishes.
+        Introducing Bavah Premium Safron.
+        Naturally dried, flower-derived Indian saffron,
+        selected for cooking, biryani, rice and
+        delicious culinary creations.
       </p>
 
       <a class="btn btn-gold"
-        href="https://wa.me/23058251875?text=Hello%20Zafran%20Gold%20Mauritius%2C%20I%20would%20like%20to%20order%20your%20Indian%20saffron.">
-        ORDER ON WHATSAPP →
+        href="https://wa.me/23058251875?text=Hello%20Bavah%20Premium%20Safron%2C%20I%20would%20like%20to%20place%20an%20order.">
+        ORDER NOW ON WHATSAPP →
       </a>
 
       <a class="btn btn-outline" href="#products">
-        DISCOVER MORE
+        DISCOVER OUR PRODUCT
       </a>
 
       <div class="hero-note">
-        INDIAN ORIGIN · NATURALLY DRIED · MAURITIUS DELIVERY
+        INDIAN ORIGIN · DRY SAFFRON · MAURITIUS DELIVERY
       </div>
 
     </div>
@@ -690,415 +737,397 @@ footer p {
 <!-- TRUST BAR -->
 
 <div class="trust">
-  <div class="container trust-grid">
+<div class="container trust-grid">
 
-    <div class="trust-item">
-      <strong>Indian Origin</strong>
-      <span>Imported from India</span>
+  <div class="trust-item">
+    <strong>Indian Origin</strong>
+    <span>Imported from India</span>
+  </div>
+
+  <div class="trust-item">
+    <strong>Grade A Commercial</strong>
+    <span>Our product selection</span>
+  </div>
+
+  <div class="trust-item">
+    <strong>Naturally Dried</strong>
+    <span>Original flower product</span>
+  </div>
+
+  <div class="trust-item">
+    <strong>Islandwide Delivery</strong>
+    <span>Mauritius</span>
+  </div>
+
+</div>
+</div>
+
+<!-- PRODUCT -->
+
+<section class="products" id="products">
+<div class="container">
+
+  <div class="section-heading">
+    <div class="eyebrow">Meet Bavah Premium Safron</div>
+
+    <h2>Nature's Golden <span class="gold">Ingredient.</span></h2>
+
+    <p>
+      Discover Indian saffron in its naturally dried form.
+      A special ingredient for those who appreciate
+      the colour, aroma and flavour of saffron.
+    </p>
+  </div>
+
+  <div class="product-panel">
+
+    <div class="product-label">
+      GRADE A COMMERCIAL
     </div>
 
-    <div class="trust-item">
-      <strong>Dry Saffron</strong>
-      <span>Naturally dried threads</span>
-    </div>
+    <h3>Bavah Premium Safron</h3>
 
-    <div class="trust-item">
-      <strong>Flower Derived</strong>
-      <span>From the original flower</span>
-    </div>
+    <p>
+      Made from the original saffron flower and
+      supplied in dry form, with its natural red
+      and yellow portions. Suitable for biryani,
+      rice, cooking, desserts and food preparation.
+    </p>
 
-    <div class="trust-item">
-      <strong>Islandwide Delivery</strong>
-      <span>Across Mauritius</span>
-    </div>
+    <p>
+      Looking for the right quantity?
+      Contact us directly for pack sizes,
+      availability and current prices.
+    </p>
+
+    <a class="btn btn-gold"
+      href="https://wa.me/23058251875?text=Hello%20Bavah%20Premium%20Safron%2C%20please%20send%20me%20your%20prices%20and%20available%20quantities.">
+      GET PRICE & ORDER →
+    </a>
 
   </div>
 </div>
-
-<!-- PRODUCTS -->
-
-<section class="products" id="products">
-  <div class="container">
-
-    <div class="section-heading">
-      <div class="eyebrow">Discover our collection</div>
-      <h2>Grade A <span class="gold">Indian Saffron</span></h2>
-      <p>
-        Discover naturally dried saffron threads,
-        selected for commercial use and everyday cooking.
-      </p>
-    </div>
-
-    <div class="product-grid">
-
-      <article class="product-card">
-        <img src="zafran.jpg"
-          class="product-image"
-          alt="Naturally dried Indian saffron threads">
-
-        <h3>Premium Dry Saffron</h3>
-
-        <p>
-          Original flower-derived saffron,
-          carefully dried and ready for your kitchen.
-        </p>
-
-        <a class="btn btn-gold"
-          href="https://wa.me/23058251875?text=Hello%2C%20please%20send%20me%20the%20price%20of%20Premium%20Dry%20Indian%20Saffron.">
-          ASK PRICE ON WHATSAPP
-        </a>
-      </article>
-
-      <article class="product-card">
-        <img src="zafran.jpg"
-          class="product-image"
-          alt="Grade A commercial Indian saffron">
-
-        <h3>Grade A Commercial</h3>
-
-        <p>
-          A commercial saffron selection for cooking,
-          food preparation and regular use.
-        </p>
-
-        <a class="btn btn-gold"
-          href="https://wa.me/23058251875?text=Hello%2C%20I%20am%20interested%20in%20your%20Grade%20A%20Commercial%20Saffron.">
-          ASK PRICE ON WHATSAPP
-        </a>
-      </article>
-
-      <article class="product-card">
-        <img src="zafran.jpg"
-          class="product-image"
-          alt="Indian saffron for biryani and restaurants">
-
-        <h3>Restaurant & Biryani Supply</h3>
-
-        <p>
-          Suitable for restaurants, hotels, catering
-          and people who love preparing delicious food.
-        </p>
-
-        <a class="btn btn-gold"
-          href="https://wa.me/23058251875?text=Hello%2C%20I%20would%20like%20a%20commercial%20quotation%20for%20Indian%20saffron.">
-          BUSINESS ENQUIRY
-        </a>
-      </article>
-
-    </div>
-  </div>
 </section>
 
 <!-- QUALITY -->
 
-<section class="features" id="quality">
-  <div class="container">
+<section class="quality" id="quality">
+<div class="container">
 
-    <div class="section-heading">
-      <div class="eyebrow">Understand our saffron</div>
-      <h2>Nature Makes the Difference</h2>
+  <div class="section-heading">
+    <div class="eyebrow">Discover the product</div>
+    <h2>Quality Comes from Nature.</h2>
+    <p>
+      Learn about the natural characteristics
+      of Bavah Premium Safron.
+    </p>
+  </div>
+
+  <div class="quality-grid">
+
+    <div class="quality-card">
+      <div class="symbol">🌸</div>
+      <h3>Original Flower</h3>
       <p>
-        Saffron comes from a flower. Its natural appearance,
-        drying and preparation are part of its character.
+        Our saffron is made from the original
+        saffron flower, not artificial food colouring.
       </p>
     </div>
 
-    <div class="feature-grid">
-
-      <div class="feature">
-        <div class="symbol">🌸</div>
-        <h3>Made from the Original Flower</h3>
-        <p>
-          Our product is derived from the saffron flower,
-          not an artificial colouring product.
-        </p>
-      </div>
-
-      <div class="feature">
-        <div class="symbol">☀️</div>
-        <h3>Naturally Dried</h3>
-        <p>
-          Dry saffron threads, not wet saffron.
-          Keep the product in a cool, dry place
-          and protect it from moisture.
-        </p>
-      </div>
-
-      <div class="feature">
-        <div class="symbol">🌾</div>
-        <h3>Natural Red & Yellow Portions</h3>
-        <p>
-          Saffron threads can naturally contain
-          red and yellow parts of the flower.
-          Their appearance can vary.
-        </p>
-      </div>
-
-      <div class="feature">
-        <div class="symbol">⭐</div>
-        <h3>Grade A Commercial Selection</h3>
-        <p>
-          Our commercial saffron selection is designed
-          for customers looking for saffron for
-          cooking and food preparation.
-        </p>
-      </div>
-
+    <div class="quality-card">
+      <div class="symbol">☀️</div>
+      <h3>Naturally Dry</h3>
+      <p>
+        Our product is supplied dry, not wet.
+        Store it in a cool, dry and airtight container.
+      </p>
     </div>
+
+    <div class="quality-card">
+      <div class="symbol">🌾</div>
+      <h3>Natural Red & Yellow</h3>
+      <p>
+        Original saffron threads can contain
+        natural red and yellow portions from
+        different parts of the flower.
+      </p>
+    </div>
+
+    <div class="quality-card">
+      <div class="symbol">⭐</div>
+      <h3>Grade A Commercial</h3>
+      <p>
+        Our commercial selection is intended
+        for customers who want saffron for
+        cooking and food preparation.
+      </p>
+    </div>
+
   </div>
+</div>
 </section>
 
-<!-- STORY -->
+<!-- BRAND STORY -->
 
 <section class="story">
-  <div class="container story-grid">
+<div class="container">
 
-    <div>
-      <img src="zafran.jpg"
-        class="story-photo"
-        alt="Zafran Gold Indian dry saffron product">
+  <div class="story-text">
+
+    <div class="eyebrow">From India to Mauritius</div>
+
+    <h2>
+      A Little Safron.<br>
+      A Big Difference.
+    </h2>
+
+    <p>
+      Bavah Premium Safron brings the natural
+      character of Indian saffron to Mauritius.
+      Derived from the original flower and
+      supplied in dry form, it is a beautiful
+      ingredient for everyday cooking and special meals.
+    </p>
+
+    <p>
+      Just a little saffron can add its distinctive
+      aroma, colour and flavour to your favourite dishes.
+      Discover how it can make your biryani and rice
+      preparations even more special.
+    </p>
+
+    <div class="points">
+      <div>✦ Imported from India</div>
+      <div>✦ Original flower-derived product</div>
+      <div>✦ Naturally dried</div>
+      <div>✦ Grade A commercial selection</div>
+      <div>✦ For food and cooking</div>
+      <div>✦ Available in Mauritius</div>
     </div>
 
-    <div class="story-text">
-
-      <div class="eyebrow">From India to Mauritius</div>
-
-      <h2>Pure Flower Character.<br>
-        Natural Food Colour.</h2>
-
-      <p>
-        Zafran Gold brings Indian saffron to Mauritius.
-        Our product is made from the original saffron flower
-        and supplied in its naturally dried form.
-      </p>
-
-      <p>
-        Saffron is appreciated around the world for its
-        distinctive aroma, flavour and colour.
-        It is a special ingredient for biryani, rice,
-        desserts and many traditional dishes.
-      </p>
-
-      <div class="points">
-        <div>✦ Imported from India</div>
-        <div>✦ Dry, flower-derived saffron</div>
-        <div>✦ Natural red and yellow portions</div>
-        <div>✦ For cooking and food preparation</div>
-        <div>✦ Grade A commercial selection</div>
-      </div>
-
-    </div>
   </div>
+</div>
 </section>
 
 <!-- COOKING -->
 
 <section class="cooking" id="cooking">
-  <div class="container">
+<div class="container">
 
-    <div class="section-heading">
-      <div class="eyebrow">Bring colour to your kitchen</div>
-      <h2>One Ingredient. Many Possibilities.</h2>
+  <div class="section-heading">
+    <div class="eyebrow">Inspire your kitchen</div>
+
+    <h2>One Little Ingredient. Many Possibilities.</h2>
+
+    <p>
+      Add the natural character of saffron
+      to your favourite recipes.
+    </p>
+  </div>
+
+  <div class="cooking-grid">
+
+    <div class="cooking-card">
+      <div class="icon">🍚</div>
+      <h3>Biryani & Rice</h3>
       <p>
-        Enjoy the natural character of saffron
-        in your favourite food.
+        Bring natural saffron colour, aroma
+        and flavour to your biryani and rice.
+        Enjoy saffron without needing artificial
+        colouring for its colour.
       </p>
     </div>
 
-    <div class="cooking-grid">
-
-      <div class="cooking-card">
-        <div class="icon">🍚</div>
-        <h3>Biryani & Rice</h3>
-        <p>
-          Add saffron to your biryani and rice
-          for natural colour, aroma and flavour.
-          No artificial food colouring is needed
-          when using saffron for its colour.
-        </p>
-      </div>
-
-      <div class="cooking-card">
-        <div class="icon">🍰</div>
-        <h3>Desserts & Sweets</h3>
-        <p>
-          Bring a special flavour and colour
-          to desserts, cakes, puddings and sweets.
-        </p>
-      </div>
-
-      <div class="cooking-card">
-        <div class="icon">☕</div>
-        <h3>Drinks & Cooking</h3>
-        <p>
-          Explore saffron in warm drinks,
-          milk preparations and creative recipes.
-        </p>
-      </div>
-
+    <div class="cooking-card">
+      <div class="icon">🍰</div>
+      <h3>Desserts & Sweets</h3>
+      <p>
+        A beautiful ingredient for traditional
+        sweets, cakes, desserts and puddings.
+      </p>
     </div>
+
+    <div class="cooking-card">
+      <div class="icon">☕</div>
+      <h3>Drinks & Cooking</h3>
+      <p>
+        Explore the flavour of saffron
+        in warm drinks, milk preparations
+        and creative recipes.
+      </p>
+    </div>
+
   </div>
+</div>
 </section>
 
-<!-- CUSTOMER FEEDBACK -->
+<!-- CUSTOMER SATISFACTION -->
 
 <section class="feedback">
-  <div class="container">
+<div class="container">
 
-    <div class="eyebrow">Our customers matter</div>
+  <div class="eyebrow">Our customers are important</div>
 
-    <h2>Customer Satisfaction Is Our Priority.</h2>
+  <h2>Your Satisfaction Matters to Us.</h2>
 
-    <p>
-      We value every customer and every order.
-      Customer feedback and recommendations help us
-      continue serving Mauritius with care and attention.
-      Contact us to discover the product and ask about
-      customer experiences.
-    </p>
+  <p>
+    We believe in building relationships through
+    good service, product care and customer satisfaction.
+    We appreciate every customer who chooses
+    Bavah Premium Safron and shares their experience.
+  </p>
 
-    <a class="btn btn-gold"
-      href="https://wa.me/23058251875?text=Hello%2C%20I%20would%20like%20to%20know%20more%20about%20your%20Indian%20saffron%20and%20customer%20feedback.">
-      ASK US ON WHATSAPP
-    </a>
+  <a class="btn btn-gold"
+    href="https://wa.me/23058251875?text=Hello%2C%20I%20would%20like%20to%20know%20more%20about%20Bavah%20Premium%20Safron.">
+    CONTACT OUR TEAM
+  </a>
 
-  </div>
+</div>
 </section>
 
 <!-- DELIVERY -->
 
 <section class="delivery" id="delivery">
-  <div class="container">
+<div class="container">
 
-    <div class="delivery-icon">🚚</div>
+  <div class="delivery-icon">🚚</div>
 
-    <div class="eyebrow">Delivery across Mauritius</div>
+  <div class="eyebrow">Mauritius islandwide</div>
 
-    <h2>We Bring the Gold to Your Door.</h2>
+  <h2>From Our Hands to Your Home.</h2>
 
-    <p>
-      No matter where you are in Mauritius,
-      contact Zafran Gold to arrange your saffron order.
-      Ask us about delivery availability, charges
-      and estimated delivery time in your area.
-    </p>
+  <p>
+    Bavah Premium Safron is available for customers
+    throughout Mauritius. Contact us to arrange
+    your order and confirm delivery availability,
+    delivery charges and estimated delivery time.
+  </p>
 
-    <a class="btn btn-gold"
-      href="https://wa.me/23058251875?text=Hello%2C%20I%20would%20like%20to%20order%20Indian%20saffron.%20Please%20confirm%20delivery%20to%20my%20area.">
-      ARRANGE MY DELIVERY →
-    </a>
+  <a class="btn btn-gold"
+    href="https://wa.me/23058251875?text=Hello%20Bavah%20Premium%20Safron%2C%20please%20confirm%20delivery%20to%20my%20area%20in%20Mauritius.">
+    CHECK DELIVERY →
+  </a>
 
-  </div>
+</div>
 </section>
 
 <!-- FAQ -->
 
 <section class="faq">
-  <div class="container">
+<div class="container">
 
-    <div class="section-heading">
-      <div class="eyebrow">Good to know</div>
-      <h2>Frequently Asked Questions</h2>
-    </div>
-
-    <div class="faq-list">
-
-      <details>
-        <summary>Is your saffron from India?</summary>
-        <p>
-          Yes. Zafran Gold offers Indian-origin saffron.
-        </p>
-      </details>
-
-      <details>
-        <summary>Is the saffron wet or dry?</summary>
-        <p>
-          Our product is supplied in naturally dried form,
-          not wet saffron.
-        </p>
-      </details>
-
-      <details>
-        <summary>Why does saffron contain yellow portions?</summary>
-        <p>
-          The saffron flower has different parts.
-          Natural saffron threads can include yellow
-          portions as well as red portions.
-          Appearance alone does not establish quality.
-        </p>
-      </details>
-
-      <details>
-        <summary>Can I use it for biryani?</summary>
-        <p>
-          Yes. Saffron is suitable for biryani,
-          rice, cooking, desserts and other food preparations.
-          It provides natural colour and a distinctive aroma.
-        </p>
-      </details>
-
-      <details>
-        <summary>Do you deliver across Mauritius?</summary>
-        <p>
-          We arrange delivery enquiries across Mauritius.
-          Contact us to confirm your location and delivery fee.
-        </p>
-      </details>
-
-      <details>
-        <summary>How do I buy?</summary>
-        <p>
-          Click the WhatsApp button, tell us the quantity
-          you need and our team will assist you with
-          availability and pricing.
-        </p>
-      </details>
-
-    </div>
+  <div class="section-heading">
+    <div class="eyebrow">Frequently asked questions</div>
+    <h2>Everything You Need to Know.</h2>
   </div>
+
+  <div class="faq-list">
+
+    <details>
+      <summary>Where does Bavah Premium Safron come from?</summary>
+      <p>
+        Bavah Premium Safron is imported from India.
+      </p>
+    </details>
+
+    <details>
+      <summary>Is your saffron wet or dry?</summary>
+      <p>
+        Our saffron is supplied in dry form,
+        not wet.
+      </p>
+    </details>
+
+    <details>
+      <summary>Why does original saffron have yellow colour?</summary>
+      <p>
+        The saffron flower contains different parts.
+        Natural saffron can have yellow portions
+        alongside its red threads. Colour alone
+        does not prove authenticity or grade.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can I cook biryani with Bavah Premium Safron?</summary>
+      <p>
+        Yes. Saffron can be used in biryani,
+        rice, cooking and desserts to provide
+        natural colour, aroma and flavour.
+      </p>
+    </details>
+
+    <details>
+      <summary>Do you deliver throughout Mauritius?</summary>
+      <p>
+        We accept delivery enquiries across Mauritius.
+        Contact us to confirm your area and delivery charges.
+      </p>
+    </details>
+
+    <details>
+      <summary>How can I order?</summary>
+      <p>
+        Simply click any WhatsApp order button.
+        Send us your required quantity and we will
+        assist with price and availability.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can restaurants and businesses order?</summary>
+      <p>
+        Yes. Contact us for commercial quantities
+        and wholesale enquiries.
+      </p>
+    </details>
+
+  </div>
+</div>
 </section>
 
 <!-- CONTACT -->
 
 <section class="contact" id="contact">
-  <div class="container">
+<div class="container">
 
-    <div class="eyebrow">Your order starts here</div>
+  <div class="eyebrow">
+    Your golden experience starts here
+  </div>
 
-    <h2>Discover the Natural Gold of India.</h2>
+  <h2>Choose Bavah Premium Safron.</h2>
 
-    <p>
-      Ready to bring the natural colour and aroma
-      of Indian saffron into your kitchen?
-      Contact Zafran Gold Mauritius today.
-    </p>
+  <p>
+    Discover the natural colour and aroma
+    of Indian saffron. Order today and bring
+    something special to your kitchen.
+  </p>
 
-    <a class="btn btn-gold"
-      href="https://wa.me/23058251875?text=Hello%20Zafran%20Gold%20Mauritius%2C%20I%20would%20like%20to%20place%20an%20order%20for%20Indian%20saffron.">
-      ORDER NOW ON WHATSAPP →
+  <a class="btn btn-gold"
+    href="https://wa.me/23058251875?text=Hello%20Bavah%20Premium%20Safron%2C%20I%20would%20like%20to%20place%20an%20order.">
+    ORDER NOW ON WHATSAPP →
+  </a>
+
+  <div class="contact-details">
+
+    WHATSAPP / PHONE<br>
+    <a href="https://wa.me/23058251875">
+      +230 5825 1875
     </a>
 
-    <div class="contact-details">
+    <br><br>
 
-      WHATSAPP / PHONE<br>
-      <a href="https://wa.me/23058251875">
-        +230 5825 1875
-      </a>
+    EMAIL<br>
+    <a href="mailto:bookings@superdealsmauritius.com">
+      bookings@superdealsmauritius.com
+    </a>
 
-      <br><br>
+    <br><br>
 
-      EMAIL<br>
-      <a href="mailto:bookings@superdealsmauritius.com">
-        bookings@superdealsmauritius.com
-      </a>
-
-      <br><br>
-
-      MAURITIUS · ISLANDWIDE DELIVERY
-
-    </div>
+    MAURITIUS · ISLANDWIDE DELIVERY
 
   </div>
+</div>
 </section>
 
 </main>
@@ -1106,43 +1135,44 @@ footer p {
 <!-- FOOTER -->
 
 <footer>
-  <div class="container">
+<div class="container">
 
-    <a href="#home" class="logo">
-      ZAFRAN GOLD
-      <small>MAURITIUS</small>
-    </a>
+  <a href="#home" class="logo">
+    BAVAH
+    <small>PREMIUM SAFRON</small>
+  </a>
 
-    <div class="footer-links">
-      <a href="#home">Home</a>
-      <a href="#products">Products</a>
-      <a href="#quality">Quality</a>
-      <a href="#cooking">Cooking</a>
-      <a href="#delivery">Delivery</a>
-      <a href="#contact">Contact</a>
-    </div>
-
-    <p>
-      © <span id="year"></span> Zafran Gold Mauritius.
-      All rights reserved.
-    </p>
-
-    <p>Indian Saffron · Mauritius</p>
-
+  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#products">Product</a>
+    <a href="#quality">Quality</a>
+    <a href="#cooking">Uses</a>
+    <a href="#delivery">Delivery</a>
+    <a href="#contact">Contact</a>
   </div>
+
+  <p>
+    © <span id="year"></span>
+    Bavah Premium Safron. All rights reserved.
+  </p>
+
+  <p>Indian Saffron · Mauritius</p>
+
+</div>
 </footer>
 
 <!-- FLOATING WHATSAPP -->
 
 <a class="whatsapp"
-  href="https://wa.me/23058251875?text=Hello%20Zafran%20Gold%20Mauritius%2C%20I%20am%20interested%20in%20your%20Indian%20saffron."
+  href="https://wa.me/23058251875?text=Hello%20Bavah%20Premium%20Safron%2C%20I%20am%20interested%20in%20your%20Indian%20saffron."
   target="_blank"
   rel="noopener noreferrer"
-  aria-label="Order Indian saffron on WhatsApp">
+  aria-label="Order Bavah Premium Safron on WhatsApp">
   ☎ WhatsApp Order
 </a>
 
 <script>
+
 function toggleMenu() {
   document.getElementById("navlinks")
     .classList.toggle("active");
@@ -1150,6 +1180,7 @@ function toggleMenu() {
 
 document.getElementById("year").textContent =
   new Date().getFullYear();
+
 </script>
 
 </body>
